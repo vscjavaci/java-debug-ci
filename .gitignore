@@ -3,7 +3,6 @@ node_modules/
 .idea
 target/
 bin/
-**/lib/
 .classpath
 .project
 .settings
