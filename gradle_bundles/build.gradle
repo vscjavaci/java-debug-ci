@@ -38,7 +38,7 @@ eclipse.classpath.file {
     
 	node.classpathentry.find{
       it.@kind == 'lib' && it.@path.contains('/tools.jar')
-    }.@sourcepath = jdk_source + '/src/share/classes'
+    }.@sourcepath = jdk_source
 
     node.classpathentry.find{
       it.@kind == 'lib' && it.@path.contains('/org.eclipse.jdt.ls.core-0.2.0-SNAPSHOT.jar')

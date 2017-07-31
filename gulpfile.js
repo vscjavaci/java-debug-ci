@@ -17,11 +17,9 @@ const watch = require('gulp-watch');
 
 const javac = require('gulp-javac');
 const runSequence = require('run-sequence');
-const git = require('gulp-git');
 const del = require('del');
 const config = require('./config.json');
 const symlinkDir = require('symlink-dir');
-
 
 
 const readThrough = function () {
@@ -46,8 +44,6 @@ gulp.task('babel', () => {
 });
 
 
-
-
 gulp.task('watch', ['babel'], () => {
   return watch(['src/**/*.js', '!**/*jb_tmp*'], (change) => {
     return gulp.src(change.path, { cwd: __dirname, read: false })
@@ -59,17 +55,6 @@ gulp.task('watch', ['babel'], () => {
       .pipe(gulp.dest('out'));
   });
 });
-
-const checkLocalJdkGIT = () => {
-  if (fsp.isDirectorySync(path.join(__dirname, config["jdk.source.folder"]))) {
-    if (fsp.isFileSync(path.join(__dirname, config["jdk.source.folder"], 'src/share/classes/com/sun/jdi/VirtualMachine.java'))) {
-      return true;
-    } else {
-      throw new Error(`Invalid jdk folder ${path.join(__dirname, config["jdk.source.folder"])}, missing src/share/classes/com/sun/jdi/VirtualMachine.java`);
-    }
-  }
-  else return false;
-};
 
 gulp.task('clean', (callback) => {
   return del([
@@ -93,27 +78,18 @@ gulp.task('copy-gradle', () => {
     .pipe(gulp.dest('./dist/org.eclipse.jdt.ls.debug'));
 });
 
-gulp.task('clone-jdk-source', (callback) => {
-  if (checkLocalJdkGIT()) {
-    gutil.log('ignore jdk source clone because the source is cloned already.')
-    callback(null);
-  } else {
-    git.clone(config['jdk.source.git'], { args: config["jdk.source.folder"] }, callback);
-  }
-});
 
 gulp.task('gradle-eclipse', ['link-java-source',
   'copy-gradle'], () => {
     require('./out/prepare-eclipse-workspace').default({
       cwd: path.join(__dirname, './dist/org.eclipse.jdt.ls.debug'),
       lib: path.join(__dirname, './lib'),
-      jdk_source: path.join(__dirname, config["jdk.source.folder"])
+      jdk_source: path.join(__dirname, './lib/jdk8u-jdi.zip')
     });
   })
 
 gulp.task('dev', (callback) => {
   runSequence('clean', 'babel', [
-    'clone-jdk-source',
     'link-java-source',
     'copy-gradle'],
     'gradle-eclipse',    
