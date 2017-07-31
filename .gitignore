@@ -1,0 +1,12 @@
+node_modules/
+.DS_Store
+.idea
+target/
+bin/
+**/lib/
+.classpath
+.project
+.settings
+out/
+dist/
+.gradle/
