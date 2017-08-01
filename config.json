@@ -1,3 +1,4 @@
 {
-  
+  "jdt.ls.git": "https://github.com/vscjavaci/eclipse.jdt.ls.git",
+  "jdt.ls.folder": "../eclipse.jdt.ls"
 }

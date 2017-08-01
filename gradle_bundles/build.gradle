@@ -3,6 +3,7 @@ apply plugin: 'eclipse'
 
 sourceSets {
      main.java.srcDirs = ['src/java/main']
+     test.java.srcDirs = ['src/java/test']
 }
 
 repositories {

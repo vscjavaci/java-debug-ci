@@ -6,6 +6,8 @@ const gulp = require('gulp');
 const gutil = require('gulp-util');
 const mkdirp = require('mkdirp')
 
+const git = require('gulp-git');
+
 const through = require('through2');
 const babel = require('gulp-babel');
 const stripBom = require('remove-bom-buffer');
@@ -21,6 +23,16 @@ const del = require('del');
 const config = require('./config.json');
 const symlinkDir = require('symlink-dir');
 
+const checkLocalGIT = () => {
+  if (fsp.isDirectorySync(path.join(__dirname, config["jdt.ls.folder"]))) {
+    if (fsp.isFileSync(path.join(__dirname, config["jdt.ls.folder"], 'org.eclipse.jdt.ls.core/src/org/eclipse/jdt/ls/core/debug/IDebugServer.java'))) {
+      return true;
+    } else {
+      throw new Error(`Invalid jdk folder ${path.join(__dirname, config["jdt.ls.folder"])}, missing IDebugServer.java`);
+    }
+  }
+  else return false;
+};
 
 const readThrough = function () {
   return through.obj(function (file, enc, cb) {
@@ -69,27 +81,35 @@ gulp.task('compile-hello', () => {
 });
 
 gulp.task('link-java-source', () => {
-  mkdirp.sync('./dist/org.eclipse.jdt.ls.debug/src/java/main');
-  return symlinkDir('../eclipse.jdt.ls/org.eclipse.jdt.ls.debug/src/org', './dist/org.eclipse.jdt.ls.debug/src/java/main/org');
+  mkdirp.sync('./dist/org.eclipse.jdt.ls.debug.v2/src/java/main');
+  return symlinkDir(path.join(config["jdt.ls.folder"], '/org.eclipse.jdt.ls.debug/src/org'), './dist/org.eclipse.jdt.ls.debug.v2/src/java/main/org');
 });
 
 gulp.task('copy-gradle', () => {
   return gulp.src('./gradle_bundles/**/*')
-    .pipe(gulp.dest('./dist/org.eclipse.jdt.ls.debug'));
+    .pipe(gulp.dest('./dist/org.eclipse.jdt.ls.debug.v2'));
 });
 
+gulp.task('clone-java-source', (callback) => {
+  if (checkLocalGIT()) {
+    gutil.log('ignore jdt.ls source clone because the source is cloned already.')
+    callback(null);
+  } else {
+    git.clone(config['jdt.ls.git'], { args: config["jdt.ls.folder"] }, callback);
+  }
+});
 
 gulp.task('gradle-eclipse', ['link-java-source',
   'copy-gradle'], () => {
     require('./out/prepare-eclipse-workspace').default({
-      cwd: path.join(__dirname, './dist/org.eclipse.jdt.ls.debug'),
+      cwd: path.join(__dirname, './dist/org.eclipse.jdt.ls.debug.v2'),
       lib: path.join(__dirname, './lib'),
       jdk_source: path.join(__dirname, './lib/jdk8u-jdi.zip')
     });
   })
 
 gulp.task('dev', (callback) => {
-  runSequence('clean', 'babel', [
+  runSequence('clean', 'babel',  'clone-java-source', [
     'link-java-source',
     'copy-gradle'],
     'gradle-eclipse',    
