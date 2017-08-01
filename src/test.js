@@ -9,8 +9,7 @@ export default async function execute(args) {
 
   process.chdir(args.cwd);
   let exitcode = await util.executeWithProgress('gradlew.bat',
-  ['cleanEclipse', 
-  'eclipse', 
+  ['test',
   `-DjdkSource="${args.jdk_source.replace(/\\/g, '/')}"`,
   `-DextLib="${args.lib.replace(/\\/g, '/')}"`],  (data)=> {
     console.log(data);

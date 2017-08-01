@@ -2,8 +2,8 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 
 sourceSets {
-     main.java.srcDirs = ['src/java/main']
-     test.java.srcDirs = ['src/java/test']
+     main.java.srcDirs = ['src/main/java']
+     test.java.srcDirs = ['src/test/java']
 }
 
 repositories {
@@ -32,7 +32,7 @@ dependencies {
 def jdk_source;
 def lib_folder;
 eclipse {
-    jdk_source = System.properties['jdkSource']
+    jdk_source = System.properties['jdkSource'].replaceAll('\"', "")
     lib_folder = System.properties['extLib'].replaceAll('\"', "");
 }
 eclipse.classpath.file {
