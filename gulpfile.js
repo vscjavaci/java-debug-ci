@@ -101,7 +101,7 @@ gulp.task('clone-java-source', (callback) => {
 
 gulp.task('gradle-eclipse', ['link-java-source',
   'copy-gradle'], () => {
-    require('./out/prepare-eclipse-workspace').default({
+    return require('./out/prepare-eclipse-workspace').default({
       cwd: path.join(__dirname, './dist/org.eclipse.jdt.ls.debug.v2'),
       lib: path.join(__dirname, './lib'),
       jdk_source: path.join(__dirname, './lib/jdk8u-jdi.zip')
