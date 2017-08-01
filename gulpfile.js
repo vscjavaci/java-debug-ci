@@ -80,9 +80,13 @@ gulp.task('compile-hello', () => {
     .pipe(gulp.dest('./dist/test_data/bin'));
 });
 
+gulp.task('link-test-source', () => {
+  mkdirp.sync('./dist/org.eclipse.jdt.ls.debug.v2/src');
+  return symlinkDir('./test', './dist/org.eclipse.jdt.ls.debug.v2/src/test');
+});
 gulp.task('link-java-source', () => {
-  mkdirp.sync('./dist/org.eclipse.jdt.ls.debug.v2/src/java/main');
-  return symlinkDir(path.join(config["jdt.ls.folder"], '/org.eclipse.jdt.ls.debug/src/org'), './dist/org.eclipse.jdt.ls.debug.v2/src/java/main/org');
+  mkdirp.sync('./dist/org.eclipse.jdt.ls.debug.v2/src/main/java');
+  return symlinkDir(path.join(config["jdt.ls.folder"], '/org.eclipse.jdt.ls.debug/src/org'), './dist/org.eclipse.jdt.ls.debug.v2/src/main/java/org');
 });
 
 gulp.task('copy-gradle', () => {
@@ -106,12 +110,31 @@ gulp.task('gradle-eclipse', ['link-java-source',
       lib: path.join(__dirname, './lib').replace(/\\/g, '/'),
       jdk_source: path.join(__dirname, './lib/jdk8u-jdi.zip').replace(/\\/g, '/')
     });
-  })
+  });
+
+gulp.task('gradle-build', ['link-java-source',
+  'copy-gradle'], () => {
+    return require('./out/build').default({
+      cwd: path.join(__dirname, './dist/org.eclipse.jdt.ls.debug.v2').replace(/\\/g, '/'),
+      lib: path.join(__dirname, './lib').replace(/\\/g, '/'),
+      jdk_source: path.join(__dirname, './lib/jdk8u-jdi.zip').replace(/\\/g, '/')
+    });
+  });
+
+
 
 gulp.task('dev', (callback) => {
-  runSequence('clean', 'babel',  'clone-java-source', [
+  runSequence('clean', 'babel',  'clone-java-source', 'link-test-source', [
     'link-java-source',
     'copy-gradle'],
     'gradle-eclipse',    
+    callback);
+});
+
+gulp.task('build', (callback) => {
+  runSequence('clean', 'babel',  'clone-java-source', 'link-test-source', [
+    'link-java-source',
+    'copy-gradle'],
+    'gradle-build',
     callback);
 });

@@ -91,11 +91,10 @@ export function execStderr(command, timeout) {
     });
 }
 
-export async function executeWithProgress(command, args, cwd, outFunc) {
+export async function executeWithProgress(command, args, outFunc) {
     let bp = new BufferedProcess({
         command: command,        
         args: args || [],
-        cwd: cwd,
         stdout: (data) => {
             outFunc(data, 'stdout');
         },

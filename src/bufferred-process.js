@@ -4,7 +4,6 @@ export default class BufferedProcess {
     constructor(arg) {
         this.command = arg.command;
         this.args = arg.args;
-        this.cwd = arg.cwd;
         let emptyFunc = () => {};
         this.stdout = arg.stdout || emptyFunc;
         this.stderr = arg.stderr|| emptyFunc;
@@ -14,7 +13,7 @@ export default class BufferedProcess {
     spawn() {
         return new Promise((resolve, reject) => {
             console.log([this.command, ...this.args].join(' '));
-            this.process = ChildProcess.spawn(this.command, this.args, {cwd: this.cwd});
+            this.process = ChildProcess.spawn(this.command, this.args);
             this.process.stderr.on('data', (data) => {
                 return this._stdio(data, 'err');
             });

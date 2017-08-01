@@ -6,12 +6,13 @@ import childProcess from 'child_process';
 import BufferedProcess from './bufferred-process';
 
 export default async function execute(args) {
-  let exitcode = await util.executeWithProgress(util.cstr(`${args.cwd}/gradlew.bat`),
+
+   process.chdir(args.cwd);
+  let exitcode = await util.executeWithProgress('gradlew.bat',
   ['cleanEclipse', 
   'eclipse', 
   `-DjdkSource="${args.jdk_source.replace(/\\/g, '/')}"`,
-  `-DextLib="${args.lib.replace(/\\/g, '/')}"`],
-  args.cwd, (data)=> {
+  `-DextLib="${args.lib.replace(/\\/g, '/')}"`],  (data)=> {
     console.log(data);
   });
    if (exitcode !== 0) {
