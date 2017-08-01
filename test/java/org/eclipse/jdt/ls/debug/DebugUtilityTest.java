@@ -63,14 +63,14 @@ public class DebugUtilityTest extends EasyMockSupport {
     @Test
     public void testLaunch()
             throws IOException, IllegalConnectorArgumentsException, VMStartException {
-        List<LaunchingConnector> conectors = new ArrayList<LaunchingConnector>();
-        conectors.add(mockConnector);
+        List<LaunchingConnector> connectors = new ArrayList<LaunchingConnector>();
+        connectors.add(mockConnector);
         Map<String, Argument> defaultArgumentsMap = new HashMap<String, Argument>();
         defaultArgumentsMap.put("options", mockOptions);
         defaultArgumentsMap.put("suspend", mockSuspend);
         defaultArgumentsMap.put("main", mockMainClass);
 
-        EasyMock.expect(mockVMManager.launchingConnectors()).andReturn(conectors);
+        EasyMock.expect(mockVMManager.launchingConnectors()).andReturn(connectors);
         EasyMock.expect(mockConnector.defaultArguments()).andReturn(defaultArgumentsMap);
 
         mockOptions.setValue("-cp c:/foo");
