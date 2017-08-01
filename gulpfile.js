@@ -133,7 +133,7 @@ gulp.task('gradle-test', ['link-java-source',
 
 
 gulp.task('dev', (callback) => {
-  runSequence('clean', 'babel',  'clone-java-source', 'link-test-source', [
+  runSequence('babel',  'clone-java-source', 'link-test-source', [
     'link-java-source',
     'copy-gradle'],
     'gradle-eclipse',    
@@ -141,7 +141,7 @@ gulp.task('dev', (callback) => {
 });
 
 gulp.task('build', (callback) => {
-  runSequence('clean', 'babel',  'clone-java-source', 'link-test-source', [
+  runSequence('babel',  'clone-java-source', 'link-test-source', [
     'link-java-source',
     'copy-gradle'],
     'gradle-build',
@@ -149,7 +149,7 @@ gulp.task('build', (callback) => {
 });
 
 gulp.task('test', (callback) => {
-  runSequence('clean', 'babel',  'clone-java-source', 'link-test-source', [
+  runSequence('babel',  'clone-java-source', 'link-test-source', [
     'link-java-source',
     'copy-gradle'],
     'gradle-eclipse',

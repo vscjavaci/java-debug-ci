@@ -74,7 +74,6 @@ public class DebugUtilityTest extends EasyMockSupport {
         EasyMock.expect(mockConnector.defaultArguments()).andReturn(defaultArgumentsMap);
 
         mockOptions.setValue("-cp c:/foo");
-        mockMainClass.setValue("foo.Bar");
         mockSuspend.setValue("true");
         EasyMock.expect(mockConnector.launch(defaultArgumentsMap)).andReturn(mockVM);
         replayAll();
