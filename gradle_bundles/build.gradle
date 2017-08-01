@@ -15,8 +15,8 @@ repositories {
 dependencies {    
     compile group: 'com.github.javaparser', name: 'javaparser-core', version: '3.2.11'
 	compile files("${System.getProperty('java.home')}/../lib/tools.jar")
-    compile files("${System.getProperty('extLib')}/org.eclipse.jdt.ls.core-0.2.0-SNAPSHOT.jar")
-    compile files("${System.getProperty('extLib')}/jdimodel.jar")
+    compile files("${System.getProperty('extLib').replaceAll('\"', "")}/org.eclipse.jdt.ls.core-0.2.0-SNAPSHOT.jar")
+    compile files("${System.getProperty('extLib').replaceAll('\"', "")}/jdimodel.jar")
 	compile group: 'commons-cli', name: 'commons-cli', version: '1.3.1'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
     compile group: 'commons-io', name: 'commons-io', version: '2.5'
@@ -30,8 +30,10 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
 def jdk_source;
+def lib_folder;
 eclipse {
     jdk_source = System.properties['jdkSource']
+    lib_folder = System.properties['extLib'].replaceAll('\"', "");
 }
 eclipse.classpath.file {
   withXml{xml ->
@@ -43,10 +45,10 @@ eclipse.classpath.file {
 
     node.classpathentry.find{
       it.@kind == 'lib' && it.@path.contains('/org.eclipse.jdt.ls.core-0.2.0-SNAPSHOT.jar')
-    }.@sourcepath = System.properties['extLib'] + '/org.eclipse.jdt.ls.core-0.2.0-SNAPSHOT-sources.jar'
+    }.@sourcepath = lib_folder + '/org.eclipse.jdt.ls.core-0.2.0-SNAPSHOT-sources.jar'
 
     node.classpathentry.find{
       it.@kind == 'lib' && it.@path.contains('/jdimodel.jar')
-    }.@sourcepath = System.properties['extLib'] + '/org.eclipse.jdt.debug-3.10.1-sources.jar'
+    }.@sourcepath = lib_folder + '/org.eclipse.jdt.debug-3.10.1-sources.jar'
   }
 }
