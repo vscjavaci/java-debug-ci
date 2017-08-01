@@ -152,6 +152,7 @@ gulp.task('test', (callback) => {
   runSequence('clean', 'babel',  'clone-java-source', 'link-test-source', [
     'link-java-source',
     'copy-gradle'],
+    'gradle-eclipse',
     'gradle-test',
     callback);
 });
