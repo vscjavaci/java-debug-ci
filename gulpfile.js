@@ -161,6 +161,7 @@ gulp.task('test', (callback) => {
     'link-java-source',
     'copy-gradle'],
     'gradle-eclipse',
+    'gradle-checkstyle',
     'gradle-test',
     callback);
 });
