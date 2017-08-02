@@ -130,6 +130,14 @@ gulp.task('gradle-test', ['link-java-source',
     });
   });
 
+gulp.task('gradle-checkstyle', ['link-java-source',
+  'copy-gradle'], () => {
+    return require('./out/checkstyle').default({
+      cwd: path.join(__dirname, './dist/org.eclipse.jdt.ls.debug.v2').replace(/\\/g, '/'),
+      lib: path.join(__dirname, './lib').replace(/\\/g, '/'),
+      jdk_source: path.join(__dirname, './lib/jdk8u-jdi.zip').replace(/\\/g, '/')
+    });
+  });
 
 
 gulp.task('dev', (callback) => {
@@ -154,5 +162,13 @@ gulp.task('test', (callback) => {
     'copy-gradle'],
     'gradle-eclipse',
     'gradle-test',
+    callback);
+});
+
+gulp.task('checkstyle', (callback) => {
+  runSequence('babel',  'clone-java-source', 'link-test-source', [
+    'link-java-source',
+    'copy-gradle'],
+    'gradle-checkstyle',
     callback);
 });
