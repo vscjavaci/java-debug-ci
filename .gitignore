@@ -9,3 +9,5 @@ bin/
 out/
 dist/
 .gradle/
+server/
+ws/
