@@ -11,3 +11,5 @@ dist/
 .gradle/
 server/
 ws/
+*.iws
+*.ipr

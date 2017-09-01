@@ -1,0 +1,721 @@
+!SESSION 2017-09-01 16:25:02.510 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -data C:\ci_cc\ci\ws
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:03.463
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:03.557
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:03.573
+!MESSAGE Initializing Java Language Server 0.3.0.201709010743
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:03.588
+!MESSAGE Creating the default Java project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:04.238
+!MESSAGE Finished creating the default Java project
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:05.163
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:05.444
+!MESSAGE >> java/startDebugSession
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.475
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":1,"command":"initialize","arguments":{"linesStartAt1":true,"columnsStartAt1":true,"pathFormat":"path"}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.507
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 467
+
+{"success":true,"request_seq":1,"command":"initialize","body":{"supportsConfigurationDoneRequest":true,"supportsHitConditionalBreakpoints":true,"supportsEvaluateForHovers":false,"supportsSetVariable":true,"supportsRestartRequest":false,"supportTerminateDebuggee":true,"supportsDelayedStackTraceLoading":false,"exceptionBreakpointFilters":[{"label":"Uncaught Exceptions","filter":"uncaught"},{"label":"Caught Exceptions","filter":"caught"}]},"seq":1,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.522
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 76
+
+{"event":"initialized","body":{"type":"initialized"},"seq":2,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.522
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":2,"command":"launch","arguments":{"cwd":"C:\\ci_cc\\ci\\testcase\\1.helloworld","startupClass":"HelloWorld","classpath":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\bin","sourcePath":["C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java"]}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.522
+!MESSAGE Trying to launch Java Program with main class "HelloWorld", classpath "C:\ci_cc\ci\testcase\1.helloworld\bin".
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.644
+!MESSAGE Launching debuggee VM succeeded.
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.644
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 77
+
+{"success":true,"request_seq":2,"command":"launch","seq":3,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.659
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":3,"command":"setBreakpoints","arguments":{"lines":[1,2,3,4,5,6,7,8,9,10,11,12,13],"breakpoints":[{"line":1},{"line":2},{"line":3},{"line":4},{"line":5},{"line":6},{"line":7},{"line":8},{"line":9},{"line":10},{"line":11},{"line":12},{"line":13}],"source":{"path":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java\\HelloWorld.java"}}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.980
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 736
+
+{"success":true,"request_seq":3,"command":"setBreakpoints","body":{"breakpoints":[{"id":1,"verified":false,"line":1,"message":""},{"id":2,"verified":false,"line":2,"message":""},{"id":3,"verified":true,"line":3,"message":""},{"id":4,"verified":true,"line":4,"message":""},{"id":5,"verified":true,"line":5,"message":""},{"id":6,"verified":true,"line":6,"message":""},{"id":7,"verified":false,"line":7,"message":""},{"id":8,"verified":true,"line":8,"message":""},{"id":9,"verified":false,"line":9,"message":""},{"id":10,"verified":true,"line":10,"message":""},{"id":11,"verified":false,"line":11,"message":""},{"id":12,"verified":false,"line":12,"message":""},{"id":13,"verified":false,"line":13,"message":""}]},"seq":4,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.995
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":4,"command":"configurationDone"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:05.995
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 88
+
+{"success":true,"request_seq":4,"command":"configurationDone","seq":5,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.011
+!MESSAGE 
+JDI Event: VMStartEvent: 0
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.042
+!MESSAGE 
+JDI Event: ThreadStartEvent: 15
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.042
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 98
+
+{"event":"thread","body":{"reason":"started","threadId":1,"type":"thread"},"seq":6,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.058
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 13
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.073
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 151
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":10,"verified":true,"line":10,"message":""},"type":"breakpoint"},"seq":7,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.073
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 11
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.089
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 149
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":8,"verified":true,"line":8,"message":""},"type":"breakpoint"},"seq":8,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.105
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 9
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.105
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 149
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":6,"verified":true,"line":6,"message":""},"type":"breakpoint"},"seq":9,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.120
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 7
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.120
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 150
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":5,"verified":true,"line":5,"message":""},"type":"breakpoint"},"seq":10,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.136
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 5
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.136
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 150
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":4,"verified":true,"line":4,"message":""},"type":"breakpoint"},"seq":11,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.151
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 3
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.167
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 150
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":3,"verified":true,"line":3,"message":""},"type":"breakpoint"},"seq":12,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.167
+!MESSAGE 
+JDI Event: BreakpointEvent: 23
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.183
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 130
+
+{"event":"stopped","body":{"threadId":1,"reason":"breakpoint","allThreadsStopped":false,"type":"stopped"},"seq":13,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:06.214
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":5,"command":"stackTrace","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.841
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 303
+
+{"success":true,"request_seq":5,"command":"stackTrace","body":{"stackFrames":[{"id":1,"source":{"name":"HelloWorld.java","path":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java\\HelloWorld.java","sourceReference":0},"line":3,"column":0,"name":"main"}],"totalFrames":1},"seq":14,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.857
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":6,"command":"threads"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.857
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 302
+
+{"success":true,"request_seq":6,"command":"threads","body":{"threads":[{"id":2,"name":"Thread [Attach Listener]"},{"id":3,"name":"Thread [Signal Dispatcher]"},{"id":4,"name":"Thread [Finalizer]"},{"id":5,"name":"Thread [Reference Handler]"},{"id":1,"name":"Thread [main]"}]},"seq":15,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.873
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":7,"command":"continue","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.873
+!MESSAGE 
+JDI Event: BreakpointEvent: 22
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.888
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 104
+
+{"event":"output","body":{"category":"stdout","output":"hello","type":"output"},"seq":16,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.888
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 117
+
+{"success":true,"request_seq":7,"command":"continue","body":{"allThreadsContinued":false},"seq":17,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.888
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 130
+
+{"event":"stopped","body":{"threadId":1,"reason":"breakpoint","allThreadsStopped":false,"type":"stopped"},"seq":18,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.904
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":8,"command":"stackTrace","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.904
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 303
+
+{"success":true,"request_seq":8,"command":"stackTrace","body":{"stackFrames":[{"id":2,"source":{"name":"HelloWorld.java","path":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java\\HelloWorld.java","sourceReference":0},"line":4,"column":0,"name":"main"}],"totalFrames":1},"seq":19,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.904
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":9,"command":"threads"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.920
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 302
+
+{"success":true,"request_seq":9,"command":"threads","body":{"threads":[{"id":2,"name":"Thread [Attach Listener]"},{"id":3,"name":"Thread [Signal Dispatcher]"},{"id":4,"name":"Thread [Finalizer]"},{"id":5,"name":"Thread [Reference Handler]"},{"id":1,"name":"Thread [main]"}]},"seq":20,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.920
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":10,"command":"continue","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.920
+!MESSAGE 
+JDI Event: BreakpointEvent: 17
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.920
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 118
+
+{"success":true,"request_seq":10,"command":"continue","body":{"allThreadsContinued":false},"seq":21,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.935
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 130
+
+{"event":"stopped","body":{"threadId":1,"reason":"breakpoint","allThreadsStopped":false,"type":"stopped"},"seq":22,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.935
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":11,"command":"stackTrace","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.935
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 305
+
+{"success":true,"request_seq":11,"command":"stackTrace","body":{"stackFrames":[{"id":3,"source":{"name":"HelloWorld.java","path":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java\\HelloWorld.java","sourceReference":0},"line":10,"column":0,"name":"main"}],"totalFrames":1},"seq":23,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.951
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":12,"command":"threads"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.951
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 303
+
+{"success":true,"request_seq":12,"command":"threads","body":{"threads":[{"id":2,"name":"Thread [Attach Listener]"},{"id":3,"name":"Thread [Signal Dispatcher]"},{"id":4,"name":"Thread [Finalizer]"},{"id":5,"name":"Thread [Reference Handler]"},{"id":1,"name":"Thread [main]"}]},"seq":24,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.951
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":13,"command":"continue","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.966
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 109
+
+{"event":"output","body":{"category":"stdout","output":" world\r\n","type":"output"},"seq":25,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.966
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 118
+
+{"success":true,"request_seq":13,"command":"continue","body":{"allThreadsContinued":false},"seq":26,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.966
+!MESSAGE 
+JDI Event: ThreadDeathEvent: 16
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.982
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 98
+
+{"event":"thread","body":{"reason":"exited","threadId":1,"type":"thread"},"seq":27,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.982
+!MESSAGE 
+JDI Event: VMDisconnectEvent: 0
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.982
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 91
+
+{"event":"terminated","body":{"restart":false,"type":"terminated"},"seq":28,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:25:10.998
+!MESSAGE Debug connection closed
+!SESSION 2017-09-01 16:25:58.590 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_131
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -data C:\ci_cc\ci\ws
+
+!ENTRY org.eclipse.core.resources 2 10035 2017-09-01 16:25:59.418
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:59.590
+!MESSAGE class org.eclipse.jdt.ls.core.internal.JavaLanguageServerPlugin is started
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:59.703
+!MESSAGE >> initialize
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:25:59.717
+!MESSAGE Initializing Java Language Server 0.3.0.201709010743
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:26:00.691
+!MESSAGE Importing Eclipse project(s)
+
+!ENTRY org.eclipse.jdt.ls.core 1 0 2017-09-01 16:26:00.941
+!MESSAGE >> java/startDebugSession
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:00.972
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":1,"command":"initialize","arguments":{"linesStartAt1":true,"columnsStartAt1":true,"pathFormat":"path"}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.019
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 467
+
+{"success":true,"request_seq":1,"command":"initialize","body":{"supportsConfigurationDoneRequest":true,"supportsHitConditionalBreakpoints":true,"supportsEvaluateForHovers":false,"supportsSetVariable":true,"supportsRestartRequest":false,"supportTerminateDebuggee":true,"supportsDelayedStackTraceLoading":false,"exceptionBreakpointFilters":[{"label":"Uncaught Exceptions","filter":"uncaught"},{"label":"Caught Exceptions","filter":"caught"}]},"seq":1,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.019
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 76
+
+{"event":"initialized","body":{"type":"initialized"},"seq":2,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.019
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":2,"command":"launch","arguments":{"cwd":"C:\\ci_cc\\ci\\testcase\\1.helloworld","startupClass":"HelloWorld","classpath":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\bin","sourcePath":["C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java"]}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.035
+!MESSAGE Trying to launch Java Program with main class "HelloWorld", classpath "C:\ci_cc\ci\testcase\1.helloworld\bin".
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.128
+!MESSAGE Launching debuggee VM succeeded.
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.143
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 77
+
+{"success":true,"request_seq":2,"command":"launch","seq":3,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.143
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":3,"command":"setBreakpoints","arguments":{"lines":[1,2,3,4,5,6,7,8,9,10,11,12,13],"breakpoints":[{"line":1},{"line":2},{"line":3},{"line":4},{"line":5},{"line":6},{"line":7},{"line":8},{"line":9},{"line":10},{"line":11},{"line":12},{"line":13}],"source":{"path":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java\\HelloWorld.java"}}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.393
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 736
+
+{"success":true,"request_seq":3,"command":"setBreakpoints","body":{"breakpoints":[{"id":1,"verified":false,"line":1,"message":""},{"id":2,"verified":false,"line":2,"message":""},{"id":3,"verified":true,"line":3,"message":""},{"id":4,"verified":true,"line":4,"message":""},{"id":5,"verified":true,"line":5,"message":""},{"id":6,"verified":true,"line":6,"message":""},{"id":7,"verified":false,"line":7,"message":""},{"id":8,"verified":true,"line":8,"message":""},{"id":9,"verified":false,"line":9,"message":""},{"id":10,"verified":true,"line":10,"message":""},{"id":11,"verified":false,"line":11,"message":""},{"id":12,"verified":false,"line":12,"message":""},{"id":13,"verified":false,"line":13,"message":""}]},"seq":4,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.393
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":4,"command":"configurationDone"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.409
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 88
+
+{"success":true,"request_seq":4,"command":"configurationDone","seq":5,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.409
+!MESSAGE 
+JDI Event: VMStartEvent: 0
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.440
+!MESSAGE 
+JDI Event: ThreadStartEvent: 15
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.440
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 98
+
+{"event":"thread","body":{"reason":"started","threadId":1,"type":"thread"},"seq":6,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.456
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 13
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.471
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 151
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":10,"verified":true,"line":10,"message":""},"type":"breakpoint"},"seq":7,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.487
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 11
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.487
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 149
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":8,"verified":true,"line":8,"message":""},"type":"breakpoint"},"seq":8,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.503
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 9
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.503
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 149
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":6,"verified":true,"line":6,"message":""},"type":"breakpoint"},"seq":9,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.518
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 7
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.518
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 150
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":5,"verified":true,"line":5,"message":""},"type":"breakpoint"},"seq":10,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.534
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 5
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.534
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 150
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":4,"verified":true,"line":4,"message":""},"type":"breakpoint"},"seq":11,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.549
+!MESSAGE 
+JDI Event: ClassPrepareEvent: 3
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.549
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 150
+
+{"event":"breakpoint","body":{"reason":"new","breakpoint":{"id":3,"verified":true,"line":3,"message":""},"type":"breakpoint"},"seq":12,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.549
+!MESSAGE 
+JDI Event: BreakpointEvent: 23
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.565
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 130
+
+{"event":"stopped","body":{"threadId":1,"reason":"breakpoint","allThreadsStopped":false,"type":"stopped"},"seq":13,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:01.565
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":5,"command":"stackTrace","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.190
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 303
+
+{"success":true,"request_seq":5,"command":"stackTrace","body":{"stackFrames":[{"id":1,"source":{"name":"HelloWorld.java","path":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java\\HelloWorld.java","sourceReference":0},"line":3,"column":0,"name":"main"}],"totalFrames":1},"seq":14,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.190
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":6,"command":"threads"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.206
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 302
+
+{"success":true,"request_seq":6,"command":"threads","body":{"threads":[{"id":2,"name":"Thread [Attach Listener]"},{"id":3,"name":"Thread [Signal Dispatcher]"},{"id":4,"name":"Thread [Finalizer]"},{"id":5,"name":"Thread [Reference Handler]"},{"id":1,"name":"Thread [main]"}]},"seq":15,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.206
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":7,"command":"continue","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.206
+!MESSAGE 
+JDI Event: BreakpointEvent: 22
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.221
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 117
+
+{"success":true,"request_seq":7,"command":"continue","body":{"allThreadsContinued":false},"seq":17,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.221
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 104
+
+{"event":"output","body":{"category":"stdout","output":"hello","type":"output"},"seq":16,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.221
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 130
+
+{"event":"stopped","body":{"threadId":1,"reason":"breakpoint","allThreadsStopped":false,"type":"stopped"},"seq":18,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.237
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":8,"command":"stackTrace","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.237
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 303
+
+{"success":true,"request_seq":8,"command":"stackTrace","body":{"stackFrames":[{"id":2,"source":{"name":"HelloWorld.java","path":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java\\HelloWorld.java","sourceReference":0},"line":4,"column":0,"name":"main"}],"totalFrames":1},"seq":19,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.237
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":9,"command":"threads"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.253
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 302
+
+{"success":true,"request_seq":9,"command":"threads","body":{"threads":[{"id":2,"name":"Thread [Attach Listener]"},{"id":3,"name":"Thread [Signal Dispatcher]"},{"id":4,"name":"Thread [Finalizer]"},{"id":5,"name":"Thread [Reference Handler]"},{"id":1,"name":"Thread [main]"}]},"seq":20,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.253
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":10,"command":"continue","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.253
+!MESSAGE 
+JDI Event: BreakpointEvent: 17
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.268
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 118
+
+{"success":true,"request_seq":10,"command":"continue","body":{"allThreadsContinued":false},"seq":21,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.268
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 130
+
+{"event":"stopped","body":{"threadId":1,"reason":"breakpoint","allThreadsStopped":false,"type":"stopped"},"seq":22,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.268
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":11,"command":"stackTrace","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.268
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 305
+
+{"success":true,"request_seq":11,"command":"stackTrace","body":{"stackFrames":[{"id":3,"source":{"name":"HelloWorld.java","path":"C:\\ci_cc\\ci\\testcase\\1.helloworld\\src\\main\\java\\HelloWorld.java","sourceReference":0},"line":10,"column":0,"name":"main"}],"totalFrames":1},"seq":23,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.284
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":12,"command":"threads"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.284
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 303
+
+{"success":true,"request_seq":12,"command":"threads","body":{"threads":[{"id":2,"name":"Thread [Attach Listener]"},{"id":3,"name":"Thread [Signal Dispatcher]"},{"id":4,"name":"Thread [Finalizer]"},{"id":5,"name":"Thread [Reference Handler]"},{"id":1,"name":"Thread [main]"}]},"seq":24,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.300
+!MESSAGE 
+[REQUEST]
+{"type":"request","seq":13,"command":"continue","arguments":{"threadId":1}}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.300
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 109
+
+{"event":"output","body":{"category":"stdout","output":" world\r\n","type":"output"},"seq":25,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.300
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 118
+
+{"success":true,"request_seq":13,"command":"continue","body":{"allThreadsContinued":false},"seq":26,"type":"response"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.315
+!MESSAGE 
+JDI Event: ThreadDeathEvent: 16
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.315
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 98
+
+{"event":"thread","body":{"reason":"exited","threadId":1,"type":"thread"},"seq":27,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.315
+!MESSAGE 
+JDI Event: VMDisconnectEvent: 0
+
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.331
+!MESSAGE 
+[[RESPONSE]]
+Content-Length: 91
+
+{"event":"terminated","body":{"restart":false,"type":"terminated"},"seq":28,"type":"event"}
+
+!ENTRY org.eclipse.jdt.ls.debug 1 0 2017-09-01 16:26:02.331
+!MESSAGE Debug connection closed
