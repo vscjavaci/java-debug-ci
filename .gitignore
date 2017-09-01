@@ -3,8 +3,6 @@ node_modules/
 .idea
 target/
 bin/
-.classpath
-.project
 .settings
 out/
 dist/
