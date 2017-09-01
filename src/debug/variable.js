@@ -1,13 +1,13 @@
 import path from 'path'
 import * as utils from './test-utils'
-
-export class HelloWorld {
+const BREAK_POS = 49
+export class Variable {
     get workspaceRoot() {
-        return '1.helloworld';
+        return '4.variable';
     }
 
     get mainClass() {
-        return 'HelloWorld';
+        return 'VariableTest';
     }
 
     get sourcePath() {
@@ -20,19 +20,35 @@ export class HelloWorld {
 
     get initialBreakpoints() {
         return [{
-            relativePath: "HelloWorld.java",
-            lines: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+            relativePath: "VariableTest.java",
+            lines: [BREAK_POS]
         }];
     }
 
     withEngine(engine) {
-        const breakpointFile = path.join(engine.cwd, this.sourcePath, 'HelloWorld.java');
-        const expectedLines = [3, 4, 10, 12];
+        const breakpointFile = path.join(engine.cwd, this.sourcePath, 'VariableTest.java');
         const outputList = [];
-        let linePos = 0;
-        engine.registerHandler('breakpoint:*/HelloWorld.java:*', async (event, arg1, arg2, detail) => {
+        const expectVariableList = {
+            'arrays': {
+                type: 'int[]',
+                value: ''
+            },
+            'i': {
+                type: 'int',
+                value: '111'
+            },
+            'nullstr': {
+                type: 'null',
+                value: 'null'
+            },
+            'str': {
+                value: /^\"string\stest[a]+\.+\"\s+\(id=\d+\)$/g,
+                type: 'java.lang.String',
+            }
+        };
+        engine.registerHandler('breakpoint:*/VariableTest.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
-            detail.line.should.equal(expectedLines[linePos++]);
+            detail.line.should.equal(BREAK_POS);
             console.log('***threads', await engine.threads());
             const scopes = await engine.scopes(detail.id);
             console.log('***scopes', scopes);
@@ -46,6 +62,8 @@ export class HelloWorld {
                     if (variable.name === 'args') {
                         variable.type.should.equal('java.lang.String[]');
                         utils.shouldMatch(variable.value, /^java.lang.String\[0]\s+\(id=\d+\)$/g);
+                    } else if (expectVariableList[variable.name]) {
+                        utils.compareVariable(expectVariableList[variable.name], variable);
                     }
                 }
             }
@@ -57,7 +75,7 @@ export class HelloWorld {
             console.log("****", detail.output)
         });
         engine.registerHandler('terminated', async () => {
-            outputList.join().should.equal('hello, world\r\n');
+            outputList.join().should.equal('0\r\n');
         });
     }
 }

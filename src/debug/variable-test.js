@@ -1,4 +1,3 @@
-import {HelloWorld} from "./helloworld";
 import chai from 'chai'
 import fs from 'fs-plus'
 import path from 'path'
@@ -9,6 +8,7 @@ import {startDebugServer} from './debug-proxy'
 import {startLS} from './jdt-ls-starter'
 import mkdirp from 'mkdirp'
 import * as utils from './test-utils'
+import {Variable} from "./variable";
 
 chai.should();
 
@@ -18,7 +18,7 @@ const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../server')
 const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
 
 describe('HelloWorld test', () => {
-    let helloworld;
+    let varibleTest;
     let port;
     let _launchRequest;
     let dc;
@@ -27,7 +27,7 @@ describe('HelloWorld test', () => {
     beforeEach(function() {
         this.timeout(1000 * 20);
         return (async () => {
-            helloworld = new HelloWorld();
+            varibleTest = new Variable();
             setBreakpointFunc = (dc, file, lines) => {
                 return dc.setBreakpointsRequest({
                     lines: lines,
@@ -37,7 +37,7 @@ describe('HelloWorld test', () => {
                     source: {path: file}
                 });
             };
-            DATA_ROOT = path.join(ROOT, helloworld.workspaceRoot);
+            DATA_ROOT = path.join(ROOT, varibleTest.workspaceRoot);
             if (!fs.isDirectorySync(DATA_ROOT)) {
                 throw new Error(`${DATA_ROOT} doesn't exist.`);
             }
@@ -54,10 +54,10 @@ describe('HelloWorld test', () => {
             _launchRequest = () => {
                 return {
                     "cwd": DATA_ROOT,
-                    "startupClass": helloworld.mainClass,
-                    "classpath": path.join(DATA_ROOT, helloworld.outputPath),
+                    "startupClass": varibleTest.mainClass,
+                    "classpath": path.join(DATA_ROOT, varibleTest.outputPath),
                     "sourcePath": [
-                        path.join(DATA_ROOT, helloworld.sourcePath)
+                        path.join(DATA_ROOT, varibleTest.sourcePath)
                     ]
                 };
             };
@@ -74,17 +74,17 @@ describe('HelloWorld test', () => {
         socket.destroy();
     });
 
-    it('should pass HelloWorld test.', function(done) {
+    it('should pass Variable test.', function(done) {
         this.timeout(50000);
         (async () => {
             try {
-                assert.isOk(helloworld, 'failed to creawte helloworld test.');
+                assert.isOk(varibleTest, 'failed to creawte helloworld test.');
                 await dc.launch(_launchRequest());
                 console.log('launch success.');
 
-                if (helloworld.initialBreakpoints) {
-                    for (let breakpoint of helloworld.initialBreakpoints) {
-                        const breakFile = path.join(DATA_ROOT, helloworld.sourcePath, breakpoint.relativePath);
+                if (varibleTest.initialBreakpoints) {
+                    for (let breakpoint of varibleTest.initialBreakpoints) {
+                        const breakFile = path.join(DATA_ROOT, varibleTest.sourcePath, breakpoint.relativePath);
                         const breakpointResponse = await setBreakpointFunc(dc, breakFile, breakpoint.lines);
                         utils.validateResponse(breakpointResponse);
                     }
@@ -92,7 +92,7 @@ describe('HelloWorld test', () => {
                 // starting
                 await dc.configurationDoneRequest();
                 let debugEngine = new DebugEngine(DATA_ROOT, dc);
-                helloworld.withEngine(debugEngine);
+                varibleTest.withEngine(debugEngine);
                 dc.on('output', event => {
                     return debugEngine.handleEvent('output', event.body.category, null, event.body).catch(console.log);
                 });

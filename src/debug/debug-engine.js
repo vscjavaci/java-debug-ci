@@ -38,4 +38,15 @@ export class DebugEngine {
         return response.body;
     }
 
+    async scopes(stackFrameId) {
+        const response = await this.dc.scopesRequest({frameId: stackFrameId});
+        utils.validateResponse(response);
+        return response.body;
+    }
+
+    async variables(variableId) {
+        const response = await this.dc.variablesRequest({variablesReference: variableId});
+        utils.validateResponse(response);
+        return response.body;
+    }
 }

@@ -1,5 +1,7 @@
+import chai from 'chai'
 import fs from 'fs-plus'
-
+import _ from 'lodash'
+const assert = chai.assert;
 const isCaseInsensitive = fs.isCaseInsensitive();
 export function pathEquals(file1, file2) {
     if (!isCaseInsensitive) {
@@ -11,5 +13,24 @@ export function pathEquals(file1, file2) {
 
 
 export function validateResponse(response) {
-    response.success.should.be.true;
+    assert(response.success, `bad response: ${JSON.stringify(response, null, 4)}`);
+}
+
+export function shouldMatch(str, reg) {
+    assert(reg.exec(str), `expected ${reg}, but acutally ${str}`);
+}
+const compare = (expect, actual) => {
+    if (_.isString(expect)) {
+        actual.should.equal(expect);
+    } else if (expect.exec) {
+        shouldMatch(actual, expect);
+    }
+};
+export function compareVariable(expect, actual) {
+    if (expect.type) {
+        compare(expect.type, actual.type);
+    }
+    if (expect.value) {
+        compare(expect.value, actual.value);
+    }
 }
