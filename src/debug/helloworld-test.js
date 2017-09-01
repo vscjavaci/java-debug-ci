@@ -74,51 +74,54 @@ describe('HelloWorld test', () => {
         socket.destroy();
     });
 
-    it('should finish HelloWorld project.', (async () => {
-        try {
-            assert.isOk(helloworld, 'helloworld test case should be created');
-            await dc.launch(_launchRequest());
-            console.log('launch success.');
+    it('should finish HelloWorld project.', function(done) {
+        this.timeout(50000);
+        return (async () => {
+            try {
+                assert.isOk(helloworld, 'helloworld test case should be created');
+                await dc.launch(_launchRequest());
+                console.log('launch success.');
 
-            if (helloworld.initialBreakpoints) {
-                for (let breakpoint of helloworld.initialBreakpoints) {
-                    const breakFile = path.join(DATA_ROOT, helloworld.sourcePath, breakpoint.relativePath);
-                    const breakpointResponse = await setBreakpointFunc(dc, breakFile, breakpoint.lines);
-                    utils.validateResponse(breakpointResponse);
+                if (helloworld.initialBreakpoints) {
+                    for (let breakpoint of helloworld.initialBreakpoints) {
+                        const breakFile = path.join(DATA_ROOT, helloworld.sourcePath, breakpoint.relativePath);
+                        const breakpointResponse = await setBreakpointFunc(dc, breakFile, breakpoint.lines);
+                        utils.validateResponse(breakpointResponse);
+                    }
                 }
+                // starting
+                await dc.configurationDoneRequest();
+                let debugEngine = new DebugEngine(DATA_ROOT, dc);
+                let stoppedPromise = null;
+                helloworld.withEngine(debugEngine);
+                dc.on('output', event => {
+                    return debugEngine.handleEvent('output', event.body.category, null, event.body).catch(console.log);
+                });
+                dc.on('stopped', (event) => {
+                    const stopped = event.body;
+                    if (stopped.reason === 'breakpoint') {
+                        dc.stackTraceRequest({
+                            threadId: event.body.threadId
+                        }).then(stackTracesResponse => {
+                            utils.validateResponse(stackTracesResponse);
+                            const stackTrace = stackTracesResponse.body.stackFrames[0];
+                            return debugEngine.handleEvent('breakpoint', stackTrace.source.path.replace(/\\/g, '/'), stackTrace.line.toString(), {...stackTrace, ...{event: event}}).catch(console.log);
+                        });
+                    }
+                    //TODO, more handle towards step event
+                });
+
+                dc.on('terminated', (event) => {
+                    debugEngine.handleEvent('terminated');
+                });
+
+                const event = await dc.waitForEvent('terminated');
+                console.log('exiting', event);
+                done();
+            } catch (error) {
+                done(error);
+                throw error;
             }
-            // starting
-            await dc.configurationDoneRequest();
-            let debugEngine = new DebugEngine(DATA_ROOT, dc);
-            let stoppedPromise = null;
-            helloworld.withEngine(debugEngine);
-            dc.on('output', event => {
-                return debugEngine.handleEvent('output', event.body.category, null, event.body).catch(console.log);
-            });
-            dc.on('stopped', (event) => {
-                const stopped = event.body;
-                if (stopped.reason === 'breakpoint') {
-                    dc.stackTraceRequest({
-                        threadId: event.body.threadId
-                    }).then(stackTracesResponse => {
-                        utils.validateResponse(stackTracesResponse);
-                        const stackTrace = stackTracesResponse.body.stackFrames[0];
-                        return debugEngine.handleEvent('breakpoint', stackTrace.source.path.replace(/\\/g, '/'), stackTrace.line.toString(), {...stackTrace, ...{event: event}}).catch(console.log);
-                    });
-                }
-                //TODO, more handle towards step event
-            });
-
-            dc.on('terminated', (event) => {
-                debugEngine.handleEvent('terminated');
-            });
-
-            const event = await dc.waitForEvent('terminated');
-            console.log('exiting', event);
-        } catch (error) {
-            console.log(error);
-            throw error;
-        }
-    })).timeout(50000);
-
+        })();
+    });
 });
