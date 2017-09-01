@@ -76,7 +76,7 @@ describe('HelloWorld test', () => {
 
     it('should finish HelloWorld project.', function(done) {
         this.timeout(50000);
-        return (async () => {
+        (async () => {
             try {
                 assert.isOk(helloworld, 'helloworld test case should be created');
                 await dc.launch(_launchRequest());
