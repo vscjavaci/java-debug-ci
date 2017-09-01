@@ -204,7 +204,7 @@ function mvnw() {
 
 const server_dir = '../eclipse.jdt.ls';
 gulp.task('build_server', ['clean_server'], () => {
-    return cp.execSync(mvnw()+ ' -Pserver-distro clean package -o', {cwd:server_dir, stdio:[0,1,2]} );
+    return cp.execSync(mvnw()+ ' -Pserver-distro clean package ', {cwd:server_dir, stdio:[0,1,2]} );
     gulp.src(server_dir + '/org.eclipse.jdt.ls.product/distro/*.tar.gz')
         .pipe(decompress())
         .pipe(gulp.dest('./server'));
