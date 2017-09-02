@@ -75,7 +75,7 @@ export class Variable {
             console.log("****", detail.output)
         });
         engine.registerHandler('terminated', async () => {
-            outputList.join().should.equal('0\r\n');
+            outputList.join('').should.equal('0\r\n');
         });
     }
 }

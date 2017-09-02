@@ -57,7 +57,7 @@ export class HelloWorld {
             console.log("****", detail.output)
         });
         engine.registerHandler('terminated', async () => {
-            outputList.join().should.equal('hello, world\r\n');
+            outputList.join('').should.equal('hello world\r\n');
         });
     }
 }

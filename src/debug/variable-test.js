@@ -17,7 +17,8 @@ const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
 const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../server'));
 const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
 
-describe('HelloWorld test', () => {
+describe('Variable test', function() {
+    this.timeout(1000 * 20);
     let varibleTest;
     let port;
     let _launchRequest;
@@ -25,7 +26,6 @@ describe('HelloWorld test', () => {
     let DATA_ROOT;
     let setBreakpointFunc;
     beforeEach(function() {
-        this.timeout(1000 * 20);
         return (async () => {
             varibleTest = new Variable();
             setBreakpointFunc = (dc, file, lines) => {
