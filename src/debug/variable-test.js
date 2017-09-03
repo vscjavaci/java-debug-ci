@@ -6,14 +6,15 @@ const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
 const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../server'));
 const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
 
-describe('HelloWorld test', () => {
+describe('Variable test', function() {
+    this.timeout(1000 * 20);
     let config;
     let DATA_ROOT;
     let debugEngine;
     beforeEach(function () {
         this.timeout(1000 * 20);
         return (async () => {
-            config = new HelloWorld();
+            config = new Variable();
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
             debugEngine = await utils.createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE,config);
         })();
@@ -23,7 +24,7 @@ describe('HelloWorld test', () => {
         return debugEngine.close();
     });
 
-    it('should pass HelloWorld test.', function (done) {
+    it('should pass Variable test.', function(done) {
         this.timeout(1000 * 20);
         (async () => {
             try {
@@ -48,13 +49,15 @@ describe('HelloWorld test', () => {
     });
 });
 
-class HelloWorld {
+
+const BREAK_POS = 49
+class Variable {
     get workspaceRoot() {
-        return '1.helloworld';
+        return '4.variable';
     }
 
     get mainClass() {
-        return 'HelloWorld';
+        return 'VariableTest';
     }
 
     get sourcePath() {
@@ -67,19 +70,35 @@ class HelloWorld {
 
     get initialBreakpoints() {
         return [{
-            relativePath: "HelloWorld.java",
-            lines: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+            relativePath: "VariableTest.java",
+            lines: [BREAK_POS]
         }];
     }
 
     withEngine(engine) {
-        const breakpointFile = path.join(engine.cwd, this.sourcePath, 'HelloWorld.java');
-        const expectedLines = [3, 4, 10];
+        const breakpointFile = path.join(engine.cwd, this.sourcePath, 'VariableTest.java');
         const outputList = [];
-        let linePos = 0;
-        engine.registerHandler('breakpoint:*/HelloWorld.java:*', async (event, arg1, arg2, detail) => {
+        const expectVariableList = {
+            'arrays': {
+                type: 'int[]',
+                value: ''
+            },
+            'i': {
+                type: 'int',
+                value: '111'
+            },
+            'nullstr': {
+                type: 'null',
+                value: 'null'
+            },
+            'str': {
+                value: /^\"string\stest[a]+\.+\"\s+\(id=\d+\)$/g,
+                type: 'java.lang.String',
+            }
+        };
+        engine.registerHandler('breakpoint:*/VariableTest.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
-            detail.line.should.equal(expectedLines[linePos++]);
+            detail.line.should.equal(BREAK_POS);
             console.log('***threads', await engine.threads());
             const scopes = await engine.scopes(detail.id);
             console.log('***scopes', scopes);
@@ -93,19 +112,20 @@ class HelloWorld {
                     if (variable.name === 'args') {
                         variable.type.should.equal('java.lang.String[]');
                         utils.shouldMatch(variable.value, /^java.lang.String\[0]\s+\(id=\d+\)$/g);
+                    } else if (expectVariableList[variable.name]) {
+                        utils.compareVariable(expectVariableList[variable.name], variable);
                     }
                 }
             }
             await engine.resume(detail.event.body.threadId);
         });
-        engine.registerHandler('output*', (event, arg1, arg2, detail) => {
+        engine.registerHandler('output*', async (event, arg1, arg2, detail) => {
             detail.category.should.equal('stdout');
             outputList.push(detail.output);
             console.log("****", detail.output)
         });
-        engine.registerHandler('terminated', () => {
-            linePos.should.equal(expectedLines.length);
-            outputList.join('').should.equal('hello world\r\n');
+        engine.registerHandler('terminated', async () => {
+            outputList.join('').should.equal('0\r\n');
         });
     }
 }
