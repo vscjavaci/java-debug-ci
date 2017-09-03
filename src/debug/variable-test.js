@@ -63,6 +63,7 @@ describe('Variable test', function() {
             };
 
             dc = new DebugClient('java');
+
             await dc.start(port);
 
         })();
