@@ -1,7 +1,6 @@
 import chai from 'chai'
 import path from 'path'
 import * as utils from './test-utils'
-import {timeout} from "../util";
 chai.should();
 const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
 const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../server'));
