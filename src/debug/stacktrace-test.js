@@ -11,7 +11,7 @@ describe('StackTrace test', () => {
     let DATA_ROOT;
     let debugEngine;
     beforeEach(function () {
-        this.timeout(1000 * 20);
+        this.timeout(1000 * 50);
         return (async () => {
             config = new StackTrace();
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
@@ -24,7 +24,7 @@ describe('StackTrace test', () => {
     });
 
     it('stack trace test failure for long stack frames in recursive function.', function (done) {
-        this.timeout(1000 * 20);
+        this.timeout(1000 * 50);
         (async () => {
             try {
                 await debugEngine.launch();
