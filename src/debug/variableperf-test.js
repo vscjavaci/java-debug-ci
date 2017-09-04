@@ -95,10 +95,10 @@ class VariablePerf {
             for (let scope of scopes.scopes) {
                 const variables = await engine.variables(scope.variablesReference);
                 for (let variable of variables.variables) {
-                    console.log('******', variable);
-                    if (variable.variablesReference > 0) {
-                        console.log('----->', await engine.variables(variable.variablesReference));
-                    }
+                    // console.log('******', variable);
+                    // if (variable.variablesReference > 0) {
+                    //     console.log('----->', await engine.variables(variable.variablesReference));
+                    // }
                     if (expectVariableList[variable.name]) {
                         utils.compareVariable(expectVariableList[variable.name], variable);
                     }
