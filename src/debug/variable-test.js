@@ -22,7 +22,10 @@ describe('Variable test', function() {
     afterEach(() => {
         return debugEngine.close();
     });
-
+    engine.registerHandler('output*', async (event, arg1, arg2, detail) => {
+        console.log("****", detail.output);
+        assert(false, 'should not output anything in stacktrace test')
+    });
     it('should pass Variable test.', function(done) {
         (async () => {
             try {

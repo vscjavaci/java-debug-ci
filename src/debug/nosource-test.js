@@ -117,9 +117,9 @@ class NoSource {
             await engine.resume(detail.event.body.threadId);
         });
         engine.registerHandler('output*', async (event, arg1, arg2, detail) => {
+            console.log("****", detail.output);
             detail.category.should.equal('stdout');
             outputList.push(detail.output);
-            console.log("****", detail.output)
         });
         engine.registerHandler('terminated', async () => {
             outputList.join('').includes('CA FE BA BE 00 00 00 34 00 5C 0A 00 14 00 1E 09').should.equal(true);

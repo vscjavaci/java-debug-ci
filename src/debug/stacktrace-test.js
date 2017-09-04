@@ -74,7 +74,10 @@ class StackTrace {
 
     withEngine(engine) {
         const breakpointFile = path.join(engine.cwd, this.sourcePath, 'RecursiveTest.java');
-        const outputList = [];
+        engine.registerHandler('output*', async (event, arg1, arg2, detail) => {
+            console.log("****", detail.output);
+            assert(false, 'should not output anything in stacktrace test')
+        });
         engine.registerHandler('breakpoint:*/RecursiveTest.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
             detail.line.should.equal(8);
