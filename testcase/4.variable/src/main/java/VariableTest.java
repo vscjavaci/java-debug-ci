@@ -29,7 +29,7 @@ public class VariableTest extends Foo {
         Object a = new A();
         Class b = A.class;
         int[] intarray = new int[] { 1, 2, 3 };
-        List<String> strList = new ArrayList<>(Arrays.asList(str));
+        List<String> strList = new ArrayList<>();
         strList.add(str);
         strList.add(null);
         Map<String, Integer> map = new HashMap<String, Integer>();
