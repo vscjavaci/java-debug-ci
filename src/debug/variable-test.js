@@ -12,7 +12,6 @@ describe('Variable test', function() {
     let DATA_ROOT;
     let debugEngine;
     beforeEach(function () {
-        this.timeout(1000 * 20);
         return (async () => {
             config = new Variable();
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
@@ -25,7 +24,6 @@ describe('Variable test', function() {
     });
 
     it('should pass Variable test.', function(done) {
-        this.timeout(1000 * 20);
         (async () => {
             try {
                 await debugEngine.launch();
@@ -50,7 +48,7 @@ describe('Variable test', function() {
 });
 
 
-const BREAK_POS = 49
+const BREAK_POS = 49;
 class Variable {
     get workspaceRoot() {
         return '4.variable';

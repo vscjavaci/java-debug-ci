@@ -4,8 +4,8 @@ import path from 'path'
 import _ from 'lodash'
 import {DebugClient} from 'vscode-debugadapter-testsupport'
 import {DebugEngine} from "./debug-engine";
-import {startDebugServer} from './debug-proxy'
-import {startLS} from './jdt-ls-starter'
+import {startDebugServer, stopDebugServer} from './debug-proxy'
+import {startLS, isLanguageServerStarted, killLanguageServer} from './jdt-ls-starter'
 import mkdirp from 'mkdirp'
 
 const assert = chai.assert;
@@ -54,11 +54,15 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     if (!fs.isDirectorySync(LANGUAGE_SERVER_ROOT)) {
         throw new Error(`${LANGUAGE_SERVER_ROOT} doesn't exist.`);
     }
-
-
     const promise1 = startDebugServer(DATA_ROOT);
     mkdirp.sync(LANGUAGE_SERVER_WORKSPACE);
+    if (isLanguageServerStarted()) {
+        console.log('waiting for ls down.');
+        await killLanguageServer();
+        await timeout(1000);
+    }
     startLS(LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE);
+
     const port = parseInt(await promise1);
     await promise1;
     const dc = new DebugClient('java');
@@ -77,6 +81,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     dc.on('terminated', (event) => {
         engine.handleEvent('terminated').then(() => {
             engine.promiseResolve('terminated');
+            stopDebugServer();
         });
     });
     dc.on('output', event => {

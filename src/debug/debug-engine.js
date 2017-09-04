@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import * as utils from './test-utils'
-
+import {stopDebugServer} from './debug-proxy'
 const myReplace = str => {
     return str ? str.replace(/\:/g, '%3A').replace(/\s/, '%20') : str;
 };
@@ -99,6 +99,7 @@ export class DebugEngine {
         const socket = this.debugClient._socket;
         socket.end();
         socket.destroy();
+        stopDebugServer();
     }
 
     async waitForTerminate() {

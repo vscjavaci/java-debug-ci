@@ -1,16 +1,9 @@
-import fs from 'fs-plus'
 var net = require('net');
 var HOST = '127.0.0.1';
 var PORT = 3333;
 import DebugSession from './debug-session'
 
-
-var server = net.createServer();
-server.listen(PORT, HOST, () => {
-    console.log('Server listening on ' +
-        server.address().address + ':' + server.address().port);
-});
-
+var server;
 
 const myEncodeURI = (url) => {
     return encodeURIComponent(url.replace(/\\/g, '/'));
@@ -63,6 +56,11 @@ const initialProject = (session, rootPath) => {
 };
 
 export function startDebugServer(projectRoot) {
+    server = net.createServer();
+    server.listen(PORT, HOST, () => {
+        console.log('Server listening on ' +
+            server.address().address + ':' + server.address().port);
+    });
     return new Promise(resolve => {
         server.on('connection', (sock) => {
             console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
@@ -94,4 +92,9 @@ export function startDebugServer(projectRoot) {
             });
         });
     });
+}
+
+
+export function stopDebugServer() {
+    server.close();
 }

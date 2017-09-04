@@ -4,7 +4,8 @@ import {resolveJdkPath} from './java-executor'
 import {parseString} from 'xml2js'
 import BufferedIOProcess from './bufferred-io-process';
 import glob from 'glob';
-
+let lsStarted = false;
+let lsprocess;
 export async function startLS(location, workspacePath) {
     const jdkHome = await resolveJdkPath();
     if (!fs.isDirectorySync(jdkHome)) {
@@ -22,7 +23,6 @@ export async function startLS(location, workspacePath) {
             console.log('*' + data);
         }
     };
-    let classpath = [];
     let params = [];
     params.push('-Declipse.application=org.eclipse.jdt.ls.core.id1');
     params.push('-Dosgi.bundles.defaultStartLevel=4');
@@ -54,7 +54,7 @@ export async function startLS(location, workspacePath) {
     process.chdir(path.dirname(javaexe));
     let env = Object.create(process.env);
     env.CLIENT_PORT = '3333';
-    const _process = new BufferedIOProcess({
+    lsprocess = new BufferedIOProcess({
         env,
         command: 'java',
         args: params,
@@ -75,12 +75,25 @@ export async function startLS(location, workspacePath) {
             outputFunc(data, 'stderr');
         },
         exit: (code) => {
+            lsStarted = false;
             exitCode = code;
             if (code === 0) {
                 outputFunc(`java.exe exited.`, 'stdout');
             }
             else outputFunc(`java.exe exited with error code ${code}.`, 'stderr');
+
         }
     });
-    await _process.spawn();
+    lsStarted = true;
+    await lsprocess.spawn();
+
+}
+export function isLanguageServerStarted() {
+    return lsStarted;
+}
+
+export function killLanguageServer() {
+    if (lsStarted) {
+        return lsprocess.kill("SIGINT");
+    }
 }
