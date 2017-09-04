@@ -22,10 +22,7 @@ describe('Variable test', function() {
     afterEach(() => {
         return debugEngine.close();
     });
-    engine.registerHandler('output*', async (event, arg1, arg2, detail) => {
-        console.log("****", detail.output);
-        assert(false, 'should not output anything in stacktrace test')
-    });
+
     it('should pass Variable test.', function(done) {
         (async () => {
             try {
@@ -121,9 +118,9 @@ class Variable {
             await engine.resume(detail.event.body.threadId);
         });
         engine.registerHandler('output*', async (event, arg1, arg2, detail) => {
+            console.log("****", detail.output);
             detail.category.should.equal('stdout');
             outputList.push(detail.output);
-            console.log("****", detail.output)
         });
         engine.registerHandler('terminated', async () => {
             outputList.join('').should.equal('0\r\n');
