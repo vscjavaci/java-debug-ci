@@ -123,7 +123,7 @@ class Variable {
             outputList.push(detail.output);
         });
         engine.registerHandler('terminated', async () => {
-            outputList.join('').should.equal('0\r\n');
+            utils.equalsWithoutLineEnding(outputList.join(''), '0\r\n');
         });
     }
 }

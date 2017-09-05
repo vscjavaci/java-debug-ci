@@ -158,7 +158,7 @@ class StackTrace {
 
         engine.registerHandler('terminated', () => {
             linePos.should.equal(expectedLines.length);
-            outputList.join('').should.equal('Total Results :: 1\r\n2, jinbwan@microsoft.com, Jinbo\r\nTotal Results :: 1\r\n1, andxu@microsoft.com, Andy\r\n');
+            utils.equalsWithoutLineEnding(outputList.join(''), 'Total Results :: 1\r\n2, jinbwan@microsoft.com, Jinbo\r\nTotal Results :: 1\r\n1, andxu@microsoft.com, Andy\r\n');
         });
     }
 }

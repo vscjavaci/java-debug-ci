@@ -112,7 +112,7 @@ class VariablePerf {
             console.log("****", detail.output)
         });
         engine.registerHandler('terminated', async () => {
-            outputList.join('').should.equal('variable perf test.\r\n');
+            utils.equalsWithoutLineEnding(outputList.join(''), 'variable perf test.\r\n');
         });
     }
 }
