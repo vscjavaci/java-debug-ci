@@ -90,9 +90,9 @@ class StackTrace {
                 for (let scope of scopes.scopes) {
                     const variables = await engine.variables(scope.variablesReference);
                     for (let variable of variables.variables) {
-                        console.log('******', variable);
+                        // console.log('******', variable);
                         if (variable.variablesReference > 0) {
-                            console.log('----->', await engine.variables(variable.variablesReference));
+                            // console.log('----->', await engine.variables(variable.variablesReference));
                         }
                         if (variable.name === 'number') {
                             variable.type.should.equal('int');
