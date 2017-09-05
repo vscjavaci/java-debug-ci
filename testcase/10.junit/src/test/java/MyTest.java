@@ -2,7 +2,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class MyTests {
+public class MyTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testExceptionIsThrown() {

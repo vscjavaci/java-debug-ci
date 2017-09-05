@@ -7,7 +7,7 @@
       "request": "launch",
       "cwd": "${workspaceRoot}",
       "mainClass": "org.junit.runner.JUnitCore",
-      "args": "MyTests",      
+      "args": "MyTest",
       "sourcePaths": [
         "${workspaceRoot}/src/main/java"
       ]
