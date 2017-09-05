@@ -18,7 +18,28 @@ export function pathEquals(file1, file2) {
         return file1 && file2 && file1.replace(/\\/g, '/').toLowerCase() === file2.replace(/\\/g, '/').toLowerCase();
     }
 }
-
+export function wildcardToRegex(glob) {
+    const specialChars = "\\^$*+?.()|{}[]";
+    let regexChars = ["^"];
+    for (let i = 0; i < glob.length; ++i) {
+        const c = glob.charAt(i);
+        switch (c) {
+            case '?':
+                regexChars.push(".");
+                break;
+            case '*':
+                regexChars.push(".*");
+                break;
+            default:
+                if (specialChars.indexOf(c) >= 0) {
+                    regexChars.push("\\");
+                }
+                regexChars.push(c);
+        }
+    }
+    regexChars.push("$");
+    return new RegExp(regexChars.join(""));
+}
 
 export function validateResponse(response) {
     assert(response.success, `bad response: ${JSON.stringify(response, null, 4)}`);
@@ -94,19 +115,23 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
 
     dc.on('stopped', async (event) => {
         const stopped = event.body;
-        if (stopped.reason === 'breakpoint') {
+        if (stopped.reason === 'breakpoint' || stopped.reason === 'step') {
             try {
                 const stackTraces = (await engine.stackTrace(event.body.threadId)).stackFrames;
                 assert(stackTraces.length, 'empty stackTrace is illegal');
                 const stackTrace = stackTraces[0];
 
-                await engine.handleEvent('breakpoint',
-                    stackTrace.source.path.replace(/\\/g, '/'), stackTrace.line.toString(), {...stackTrace, ...{event: event}});
+                await engine.handleEvent(stopped.reason,
+                    stackTrace.source.path ? stackTrace.source.path.replace(/\\/g, '/') : stackTrace.source.name,
+                    stackTrace.line.toString(), {...stackTrace, ...{event: event}});
             } catch (err) {
                 console.error(err);
                 engine.promiseReject(err);
             }
+        } else {
+            throw stopped
         }
+
         //TODO, more handle towards step event
     });
     return engine;

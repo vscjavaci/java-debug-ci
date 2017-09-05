@@ -1,9 +1,10 @@
-var net = require('net');
-var HOST = '127.0.0.1';
-var PORT = 3333;
+import net from 'net';
 import DebugSession from './debug-session'
+const HOST = '127.0.0.1';
+const  PORT = 3333;
 
-var server;
+
+let server;
 
 const myEncodeURI = (url) => {
     return encodeURIComponent(url.replace(/\\/g, '/'));

@@ -21,7 +21,7 @@ export class DebugEngine {
         try {
             const eventStr = _.map(_.compact([eventName, argument1, argument2]), myReplace).join(':');
             for (let key of Object.keys(this.handlers)) {
-                const reg = new RegExp("^" + key.split("*").join(".*") + "$");
+                const reg = utils.wildcardToRegex(key);
                 if (reg.exec(eventStr)) {
                     const res = this.handlers[key](eventName, argument1, argument2, details);
                     if (res) {
@@ -65,6 +65,24 @@ export class DebugEngine {
 
     async resume(threadId) {
         const response = await this.debugClient.continueRequest({threadId});
+        utils.validateResponse(response);
+        return response.body;
+    }
+
+    async stepIn(threadId) {
+        const response = await this.debugClient.stepInRequest({threadId});
+        utils.validateResponse(response);
+        return response.body;
+    }
+
+    async stepOut(threadId) {
+        const response = await this.debugClient.stepOutRequest({threadId});
+        utils.validateResponse(response);
+        return response.body;
+    }
+
+    async stepOver(threadId) {
+        const response = await this.debugClient.nextRequest({threadId});
         utils.validateResponse(response);
         return response.body;
     }

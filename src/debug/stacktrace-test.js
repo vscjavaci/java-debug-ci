@@ -5,7 +5,7 @@ chai.should();
 const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
 const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../server'));
 const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
-
+const assert = chai.assert;
 describe('StackTrace test', () => {
     let config;
     let DATA_ROOT;
