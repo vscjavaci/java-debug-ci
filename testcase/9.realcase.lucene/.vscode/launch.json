@@ -6,8 +6,7 @@
       "name": "Java Debug",
       "request": "launch",
       "cwd": "${workspaceRoot}",
-      "stopOnEntry": true,
-      "startupClass": "LuceneTest",
+      "mainClass": "LuceneTest",
       "sourcePath": [
         "${workspaceRoot}/src/main/java"
       ],

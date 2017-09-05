@@ -7,7 +7,7 @@
       "request": "launch",
       "cwd": "${workspaceRoot}",
       "stopOnEntry": true,
-      "startupClass": "NoSourceTest",
+      "mainClass": "NoSourceTest",
       "sourcePath": [
         "${workspaceRoot}/src/main/java"
       ],

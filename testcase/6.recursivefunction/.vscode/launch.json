@@ -7,7 +7,7 @@
       "request": "launch",
       "cwd": "${workspaceRoot}",
       "stopOnEntry": true,
-      "startupClass": "RecursiveTest",
+      "mainClass": "RecursiveTest",
       "sourcePath": [
         "${workspaceRoot}/src/main/java"
       ],

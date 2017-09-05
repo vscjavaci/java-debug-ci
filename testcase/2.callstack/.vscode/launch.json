@@ -8,7 +8,7 @@
       "request": "launch",
       "cwd": "${workspaceRoot}",
       "stopOnEntry": true,
-      "startupClass": "CallStack",
+      "mainClass": "CallStack",
       "sourcePath": [
         "${workspaceRoot}/src/main/java"
       ],
