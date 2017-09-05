@@ -134,7 +134,9 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     });
     return engine;
 }
-
+export function equalsWithoutLineEnding(a, b) {
+    assert("should be equal", a.replace(/\r/g, ''), b.replace(/\r/g, ''));
+}
 export const timeout = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 };

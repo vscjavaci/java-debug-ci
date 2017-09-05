@@ -105,7 +105,7 @@ class HelloWorld {
         });
         engine.registerHandler('terminated', () => {
             linePos.should.equal(expectedLines.length);
-            outputList.join('').should.equal('hello world\r\n');
+            utils.equalsWithoutLineEnding(outputList.join(''), 'hello world\r\n');
         });
     }
 }
