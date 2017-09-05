@@ -11,7 +11,7 @@ export async function startLS(location, workspacePath) {
     if (!fs.isDirectorySync(jdkHome)) {
         throw new Error('missing jdk.')
     }
-    const javaexe = path.join(jdkHome, 'bin', 'java.exe');
+    const javaexe = path.join(jdkHome, 'bin', (process.platform === "win32") ? 'java.exe': 'java');
     if (!fs.isFileSync(javaexe)) {
         throw new Error(`Missing java.exe from path ${jdkHome}`);
     }
