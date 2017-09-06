@@ -7,7 +7,7 @@ import { startDebugServer } from './debug-server'
 const config = require('../config.json');
 let lsStarted = false;
 let lsprocess;
-let location =  'C:\\java\\vscode_java2\\server' || path.join(__dirname, '..', 'server');
+let location =   path.join(__dirname, '..', 'server');
 const workspaceRoot = path.join(__dirname, '..', 'workspace');
 mkdirp.sync(workspaceRoot);
 
