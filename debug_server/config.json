@@ -1,0 +1,6 @@
+{
+  "jdt.ls.git": "https://github.com/vscjavaci/eclipse.jdt.ls.git",
+  "jdt.ls.folder": "../eclipse.jdt.ls",
+  "jdt.ls.connect_to_port": 3333,
+  "project_root": "hello"
+}
