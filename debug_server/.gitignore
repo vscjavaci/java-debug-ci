@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+.idea
+target/
+bin/
+.settings
+out/
+dist/
+.gradle/
+server/
+workspace/
+*.iws
+*.ipr
