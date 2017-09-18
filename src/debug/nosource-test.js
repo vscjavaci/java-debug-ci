@@ -7,7 +7,7 @@ const assert = chai.assert;
 
 chai.should();
 const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
-const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../server'));
+const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../../java-debug/jdtls'));
 const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
 
 describe('Library without source test', function () {
