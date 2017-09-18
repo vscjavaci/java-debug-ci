@@ -1,10 +1,9 @@
 import chai from 'chai'
 import path from 'path'
 import * as utils from './test-utils'
+import {ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE} from './constants'
+
 chai.should();
-const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
-const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../server'));
-const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
 const assert = chai.assert;
 describe('StackTrace test', () => {
     let config;

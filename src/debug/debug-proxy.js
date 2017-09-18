@@ -1,7 +1,10 @@
 import net from 'net';
 import DebugSession from './debug-session'
+import glob from 'glob'
+import fs from 'fs-plus'
+import path from 'path'
 const HOST = '127.0.0.1';
-const  PORT = 3333;
+const PORT = 3333;
 
 
 let server;
@@ -11,7 +14,13 @@ const myEncodeURI = (url) => {
 };
 
 const initialProject = (session, rootPath) => {
-    session.send({
+    let jars = glob.sync(path.normalize(path.join(__dirname, '../../../vscode-java-debug/server/com.microsoft.java.debug.plugin-*.jar')).replace(/\\/g, '/'));
+    if (jars && jars.length) {
+        jars = jars[0];
+    } else {
+        throw new Error('Cannot find com.microsoft.java.debug.plugin-*.jar');
+    }
+    let configObj = {
         "jsonrpc": "2.0",
         "id": 0,
         "method": "initialize",
@@ -21,12 +30,18 @@ const initialProject = (session, rootPath) => {
             "rootUri": 'file:///' + myEncodeURI(rootPath),
             "capabilities": {
                 "workspace": {
-                    "applyEdit": true,
-                    "workspaceEdit": {"documentChanges": true},
-                    "didChangeConfiguration": {"dynamicRegistration": false},
-                    "didChangeWatchedFiles": {"dynamicRegistration": true},
-                    "symbol": {"dynamicRegistration": true},
-                    "executeCommand": {"dynamicRegistration": true}
+                    "didChangeConfiguration": {
+                        "dynamicRegistration": true
+                    },
+                    "didChangeWatchedFiles": {
+                        "dynamicRegistration": true
+                    },
+                    "symbol": {
+                        "dynamicRegistration": true
+                    },
+                    "executeCommand": {
+                        "dynamicRegistration": true
+                    }
                 },
                 "textDocument": {
                     "synchronization": {
@@ -35,25 +50,63 @@ const initialProject = (session, rootPath) => {
                         "willSaveWaitUntil": true,
                         "didSave": true
                     },
-                    "completion": {"dynamicRegistration": true, "completionItem": {"snippetSupport": true}},
-                    "hover": {"dynamicRegistration": true},
-                    "signatureHelp": {"dynamicRegistration": true},
-                    "references": {"dynamicRegistration": true},
-                    "documentHighlight": {"dynamicRegistration": true},
-                    "documentSymbol": {"dynamicRegistration": true},
-                    "formatting": {"dynamicRegistration": true},
-                    "rangeFormatting": {"dynamicRegistration": true},
-                    "onTypeFormatting": {"dynamicRegistration": true},
-                    "definition": {"dynamicRegistration": true},
-                    "codeAction": {"dynamicRegistration": true},
-                    "codeLens": {"dynamicRegistration": true},
-                    "documentLink": {"dynamicRegistration": true},
-                    "rename": {"dynamicRegistration": true}
+                    "completion": {
+                        "dynamicRegistration": true,
+                        "completionItem": {
+                            "snippetSupport": true
+                        }
+                    },
+                    "hover": {
+                        "dynamicRegistration": true
+                    },
+                    "signatureHelp": {
+                        "dynamicRegistration": true
+                    },
+                    "definition": {
+                        "dynamicRegistration": true
+                    },
+                    "references": {
+                        "dynamicRegistration": true
+                    },
+                    "documentHighlight": {
+                        "dynamicRegistration": true
+                    },
+                    "documentSymbol": {
+                        "dynamicRegistration": true
+                    },
+                    "codeAction": {
+                        "dynamicRegistration": true
+                    },
+                    "codeLens": {
+                        "dynamicRegistration": true
+                    },
+                    "formatting": {
+                        "dynamicRegistration": true
+                    },
+                    "rangeFormatting": {
+                        "dynamicRegistration": true
+                    },
+                    "onTypeFormatting": {
+                        "dynamicRegistration": true
+                    },
+                    "rename": {
+                        "dynamicRegistration": true
+                    },
+                    "documentLink": {
+                        "dynamicRegistration": true
+                    }
                 }
+            },
+            "initializationOptions": {
+                "bundles": [
+                    jars
+                ]
             },
             "trace": "off"
         }
-    });
+    };
+    // console.log(JSON.stringify(configObj, null, 4))
+    session.send(configObj);
 };
 
 export function startDebugServer(projectRoot) {
@@ -68,7 +121,7 @@ export function startDebugServer(projectRoot) {
             let session = new DebugSession(sock, sock);
             sock.on('error', err => {
                 if (err)
-                console.log('-------------------', err);
+                    console.log('-------------------', err);
             });
             sock.on('close', (data) => {
                 console.log('CLOSED: ' +
@@ -81,8 +134,8 @@ export function startDebugServer(projectRoot) {
                 session.send({
                     "jsonrpc": "2.0",
                     "id": "startDebugServer",
-                    "method": "java/startDebugSession",
-                    "params": "vscode.java.debugsession"
+                    "method": "workspace/executeCommand",
+                    "params": {"command": "vscode.java.startDebugSession", "arguments": []}
                 });
             });
             session.on('jsonrpc', (data) => {

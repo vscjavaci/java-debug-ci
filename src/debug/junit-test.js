@@ -2,10 +2,7 @@ import chai from 'chai'
 import path from 'path'
 import * as utils from './test-utils'
 chai.should();
-const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
-const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../server'));
-const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
-
+import {ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE} from './constants'
 describe('Debug JUnit test', () => {
     let config;
     let DATA_ROOT;
