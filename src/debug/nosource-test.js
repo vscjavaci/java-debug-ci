@@ -6,10 +6,7 @@ import * as utils from './test-utils'
 const assert = chai.assert;
 
 chai.should();
-const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
-const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../../java-debug/jdtls'));
-const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
-
+import {ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE} from './constants'
 describe('Library without source test', function () {
     this.timeout(1000 * 20);
     let config;

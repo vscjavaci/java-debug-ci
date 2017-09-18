@@ -3,10 +3,7 @@ import path from 'path'
 import * as utils from './test-utils'
 
 chai.should();
-const ROOT = path.normalize(path.join(__dirname, '../../testcase'));
-const LANGUAGE_SERVER_ROOT = path.normalize(path.join(__dirname, '../../../java-debug/jdtls'));
-const LANGUAGE_SERVER_WORKSPACE = path.normalize(path.join(__dirname, '../../ws'));
-
+import {ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE} from './constants'
 describe('Variable performance test', function () {
     this.timeout(1000 * 20);
     let config;
