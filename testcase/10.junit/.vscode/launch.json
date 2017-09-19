@@ -22,7 +22,7 @@
       "port": 0,
       "attachTimeout": 30000,
       "cwd": "${workspaceRoot}",
-      "sourcePath": [
+      "sourcePaths": [
         "${workspaceRoot}"
       ]
     }

@@ -8,7 +8,7 @@
       "cwd": "${workspaceRoot}",
       "stopOnEntry": true,
       "mainClass": "VariablePerfTest",
-      "sourcePath": [
+      "sourcePaths": [
         "${workspaceRoot}/src/main/java"
       ],
       "options": []
@@ -21,7 +21,7 @@
       "port": 0,
       "attachTimeout": 30000,
       "cwd": "${workspaceRoot}",
-      "sourcePath": [
+      "sourcePaths": [
         "${workspaceRoot}"
       ]
     }
