@@ -3,7 +3,6 @@ node_modules/
 .idea
 target/
 bin/
-.settings
 out/
 dist/
 .gradle/

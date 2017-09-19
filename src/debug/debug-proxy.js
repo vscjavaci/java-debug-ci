@@ -20,6 +20,7 @@ const initialProject = (session, rootPath) => {
     } else {
         throw new Error('Cannot find com.microsoft.java.debug.plugin-*.jar');
     }
+    console.log('using', jars);
     let configObj = {
         "jsonrpc": "2.0",
         "id": 0,
