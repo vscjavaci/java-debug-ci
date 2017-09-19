@@ -94,7 +94,8 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         "classPaths": _.map(_.compact([...(config.classPath||[]), config.outputPath]),  d=>path.resolve(DATA_ROOT, d)),
         "sourcePaths": _.map(_.compact([config.sourcePath, config.testPath]), folder =>
             path.join(DATA_ROOT, folder)),
-        "args": config.args
+        "args": config.args,
+        "encoding": config.encoding
     });
     config.withEngine(engine);
     dc.on('terminated', (event) => {
@@ -135,7 +136,8 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     return engine;
 }
 export function equalsWithoutLineEnding(a, b) {
-    assert("should be equal", a.replace(/\r/g, ''), b.replace(/\r/g, ''));
+    console.log("should be equal", a.replace(/\r/g, ''), b.replace(/\r/g, ''));
+    assert.equal(a.replace(/\r/g, ''), b.replace(/\r/g, ''), "should be equal");
 }
 export const timeout = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
