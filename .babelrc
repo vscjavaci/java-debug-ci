@@ -1,6 +1,15 @@
 {
-  "presets": ["es2015", "stage-0"],
+  "presets": [
+    ["env", {
+      "targets": {
+        "node": "6.11"
+      }
+    }]
+  ],
   "sourceMaps": true,
   "retainLines": true,
-  "plugins": ["transform-runtime", "transform-decorators-legacy"]
+  "plugins": [
+    "transform-optional-catch-binding",
+    "transform-object-rest-spread"
+  ]
 }
