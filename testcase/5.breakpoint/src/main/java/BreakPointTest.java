@@ -7,16 +7,17 @@ class A {
 public class BreakPointTest {
     public static void main(String[] args) {
         new BreakPointTest().go();
-
-        for (int i = 0; i < 100; i++) {
-            if (i < 99) {
-                new A().m();
+        int j = 0;
+        new A() {
+            void m() {
+                System.out.println("anonymous");
+            }
+        }.m();
+        for (int i = 1; i <= 100; i++) {
+            if (i <= 99) {
+                j++;
             } else {
-                new A() {
-                    void m() {
-                        System.out.println("anonymous");
-                    }
-                }.m();
+                System.out.println(j);
             }
 
         }
