@@ -70,6 +70,9 @@ class StackTrace {
             lines: [8]
         }];
     }
+    get logLevel() {
+        return "INFO";
+    }
 
     withEngine(engine) {
         const breakpointFile = path.join(engine.cwd, this.sourcePath, 'RecursiveTest.java');

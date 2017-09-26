@@ -75,7 +75,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     if (!fs.isDirectorySync(LANGUAGE_SERVER_ROOT)) {
         throw new Error(`${LANGUAGE_SERVER_ROOT} doesn't exist.`);
     }
-    const promise1 = startDebugServer(DATA_ROOT);
+    const promise1 = startDebugServer(DATA_ROOT ,config.logLevel || 'FINE');
     mkdirp.sync(LANGUAGE_SERVER_WORKSPACE);
     if (isLanguageServerStarted()) {
         console.log('waiting for ls down.');

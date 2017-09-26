@@ -110,7 +110,7 @@ const initialProject = (session, rootPath) => {
     session.send(configObj);
 };
 
-export function startDebugServer(projectRoot) {
+export function startDebugServer(projectRoot, logLevel) {
     server = net.createServer();
     server.listen(PORT, HOST, () => {
         console.log('Server listening on ' +
@@ -134,12 +134,21 @@ export function startDebugServer(projectRoot) {
                 console.log('ready', data);
                 session.send({
                     "jsonrpc": "2.0",
-                    "id": "startDebugServer",
+                    "id": "setLogLevel",
                     "method": "workspace/executeCommand",
-                    "params": {"command": "vscode.java.startDebugSession", "arguments": []}
+                    "params": {"command": "vscode.java.configLogLevel", "arguments": [logLevel]}
                 });
+
             });
             session.on('jsonrpc', (data) => {
+                if (data.id === 'setLogLevel') {
+                    session.send({
+                        "jsonrpc": "2.0",
+                        "id": "startDebugServer",
+                        "method": "workspace/executeCommand",
+                        "params": {"command": "vscode.java.startDebugSession", "arguments": []}
+                    });
+                }
                 if (data.id === 'startDebugServer') {
                     console.log('Debug server started at ', data.result);
                     resolve(data.result);
