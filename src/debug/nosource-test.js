@@ -95,7 +95,7 @@ class NoSource {
             detail.line.should.equal(BREAK_POS);
             const stackFrames = (await engine.stackTrace(detail.event.body.threadId)).stackFrames;
             console.log(stackFrames);
-            const missingSourceStack = _.find(stackFrames, {line: -1, name: 'bar'});
+            const missingSourceStack = _.find(stackFrames, {line: -1, name: 'Foo.bar(int,int,Consumer)'});
             assert(missingSourceStack, 'should have the stackframe without source.');
             const scopes = await engine.scopes(missingSourceStack.id);
             console.log('***scopes', scopes);
