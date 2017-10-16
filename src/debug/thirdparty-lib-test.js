@@ -126,7 +126,7 @@ class StackTrace {
         });
         const expectedLines = [1360, 1380, 763, 1382, 1384];
         let linePos = 0;
-        engine.registerHandler('step:*IndexWriter.java:*', async (event, arg1, arg2, detail) => {
+        engine.registerHandler('step:*IndexWriter.class:*', async (event, arg1, arg2, detail) => {
             detail.line.should.equal(expectedLines[linePos++]);
 
             const scopes = await engine.scopes(detail.id);
