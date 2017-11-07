@@ -15,7 +15,7 @@ describe('Attach test', () => {
         return (async () => {
             config = new AttachTest();
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
-            let cmdStr = 'cd dir&&cd src&&javac ./test/attachdebug.java&&java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 test.attachdebug';
+            let cmdStr = 'cd dir&&cd src&&javac -g ./test/attachdebug.java&&java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 test.attachdebug';
             
              cmdStr=cmdStr.replace("dir",DATA_ROOT);
              exec(cmdStr, function (err, stdout, stderr) {
@@ -108,7 +108,7 @@ class AttachTest {
                         utils.shouldMatch(variable.value, /^"ABCD"\s+\(id=\d+\)$/g);
                     }
                     if (variable.name === 'evens') {
-                        utils.shouldMatch(variable.value, /^12\s+\(id=\d+\)$/g);
+                        utils.shouldMatch(variable.value, /^12$/g);
                     }
                     
                 }
@@ -120,8 +120,9 @@ class AttachTest {
             outputList.push(detail.output);
             console.log("****", detail.output)
         });
-        engine.registerHandler('terminated', () => {           
-            utils.equalsWithoutLineEnding(outputList.join(''),'ABCD  12\r\n');
+        engine.registerHandler('terminated', () => {
+            //as this case is in attach mode,so nothing will print           
+            utils.equalsWithoutLineEnding(outputList.join(''),'');
         });
     }
 }
