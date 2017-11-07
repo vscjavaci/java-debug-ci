@@ -120,6 +120,7 @@ export function startDebugServer(projectRoot, logLevel) {
         server.on('connection', (sock) => {
             console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
             let session = new DebugSession(sock, sock);
+            let resolveData=new Array();
             sock.on('error', err => {
                 if (err)
                     console.log('-------------------', err);
@@ -138,10 +139,11 @@ export function startDebugServer(projectRoot, logLevel) {
                     "method": "workspace/executeCommand",
                     "params": {"command": "vscode.java.configLogLevel", "arguments": [logLevel]}
                 });
+                
 
             });
             session.on('jsonrpc', (data) => {
-                if (data.id === 'setLogLevel') {
+                if (data.id === 'resolveMainClass') {
                     session.send({
                         "jsonrpc": "2.0",
                         "id": "startDebugServer",
@@ -151,7 +153,25 @@ export function startDebugServer(projectRoot, logLevel) {
                 }
                 if (data.id === 'startDebugServer') {
                     console.log('Debug server started at ', data.result);
-                    resolve(data.result);
+                    resolveData.push(data.result);
+                    resolve(resolveData);
+                    
+                }
+
+            });
+            session.on('jsonrpc',(data)=>{
+                if(data.id=== 'setLogLevel'){
+                    session.send({
+                        "jsonrpc": "2.0",
+                        "id": "resolveMainClass",
+                        "method": "workspace/executeCommand",
+                        "params": {"command": "vscode.java.resolveMainClass", "arguments": []}
+                    });
+                    console.log('Resolve mainClass ', data.result);
+                    console.log('Resolve mainClass---> ', data.id);
+                }
+                if (data.id === 'resolveMainClass') {
+                    resolveData.push(data.result);
                 }
             });
         });

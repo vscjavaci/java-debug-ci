@@ -2,11 +2,12 @@ import chai from 'chai'
 import fs from 'fs-plus'
 import path from 'path'
 import _ from 'lodash'
-import {DebugClient} from 'vscode-debugadapter-testsupport'
-import {DebugEngine} from "./debug-engine";
-import {startDebugServer, stopDebugServer} from './debug-proxy'
-import {startLS, isLanguageServerStarted, killLanguageServer} from './jdt-ls-starter'
+import { DebugClient } from 'vscode-debugadapter-testsupport'
+import { DebugEngine } from "./debug-engine";
+import { startDebugServer, stopDebugServer } from './debug-proxy'
+import { startLS, isLanguageServerStarted, killLanguageServer } from './jdt-ls-starter'
 import mkdirp from 'mkdirp'
+var rimraf = require('rimraf');
 
 const assert = chai.assert;
 const isCaseInsensitive = fs.isCaseInsensitive();
@@ -75,26 +76,53 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     if (!fs.isDirectorySync(LANGUAGE_SERVER_ROOT)) {
         throw new Error(`${LANGUAGE_SERVER_ROOT} doesn't exist.`);
     }
-    const promise1 = startDebugServer(DATA_ROOT ,config.logLevel || 'FINE');
+
+    const promise1 = startDebugServer(DATA_ROOT, config.logLevel || 'FINE');
     mkdirp.sync(LANGUAGE_SERVER_WORKSPACE);
     if (isLanguageServerStarted()) {
         console.log('waiting for ls down.');
         await killLanguageServer();
         await timeout(1000);
+        try {
+            rimraf.sync(LANGUAGE_SERVER_WORKSPACE);
+        } catch (e) {
+            throw("Can't delete ws folder");
+        }
     }
     startLS(LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE);
+    let resolveData = await promise1;
+    let mainClass = new Array();;
+    console.log("###MainClassData-->", resolveData);
+    const port = parseInt(resolveData[1]);
+    let resolveMainClassResult = resolveData[0];
+    //resovle mainclass
+    if (!config.mainClass) {
+        for (var item in resolveMainClassResult) {
+            if (resolveMainClassResult[item]["projectName"] === config.workspaceRoot) {
+                mainClass.push(resolveMainClassResult[item]["mainClass"]);
+            }
+        }
+        if (mainClass.length <= 0) {
+            throw "can't find mainClass";
+        }
+        Object.defineProperty(config, "mainClass", {
+            value: mainClass[0]
+        })
+    }
 
-    const port = parseInt(await promise1);
     await promise1;
     const dc = new DebugClient('java');
     await dc.start(port);
     const engine = new DebugEngine(DATA_ROOT, dc, {
         "cwd": DATA_ROOT,
         "mainClass": config.mainClass,
-        "classPaths": _.map(_.compact([...(config.classPath||[]), config.outputPath]),  d=>path.resolve(DATA_ROOT, d)),
+        "classPaths": _.map(_.compact([...(config.classPath || []), config.outputPath]), d => path.resolve(DATA_ROOT, d)),
         "sourcePaths": _.map(_.compact([config.sourcePath, config.testPath]), folder =>
             path.join(DATA_ROOT, folder)),
+        "port":config.port,
+        "host":config.hostName,
         "args": config.args,
+        "vmArgs":config.vmArgs,
         "encoding": config.encoding
     });
     config.withEngine(engine);
@@ -122,7 +150,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
 
                 await engine.handleEvent(stopped.reason,
                     stackTrace.source.path ? stackTrace.source.path.replace(/\\/g, '/') : stackTrace.source.name,
-                    stackTrace.line.toString(), {...stackTrace, ...{event: event}});
+                    stackTrace.line.toString(), { ...stackTrace, ...{ event: event } });
             } catch (err) {
                 console.error(err);
                 engine.promiseReject(err);

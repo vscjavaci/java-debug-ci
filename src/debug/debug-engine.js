@@ -45,6 +45,12 @@ export class DebugEngine {
         return response.body;
     }
 
+    async attach() {
+        const response = await this.debugClient.attachRequest(this.launchConfig);
+        utils.validateResponse(response);
+        return response.body;
+    }
+
     async setBreakpoints(file, lines) {
         const response = await this.debugClient.setBreakpointsRequest({
             lines: lines,

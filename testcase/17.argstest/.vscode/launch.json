@@ -1,0 +1,25 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Debug (Launch)-ArgsTest<17.argstest>",
+            "request": "launch",
+            "mainClass": "test.ArgsTest",
+            "projectName": "17.argstest",
+            "args": "pro1 pro2 pro3",
+            "encoding": "UTF-8",
+            "vmArgs":"-DsysProp1=sp1  -DsysProp2=sp2"
+        },
+        {
+            "type": "java",
+            "name": "Debug (Attach)",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 0
+        }
+    ]
+}
