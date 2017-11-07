@@ -2,8 +2,8 @@ import chai from 'chai'
 import path from 'path'
 import * as utils from './test-utils'
 chai.should();
-var exec = require('child_process').exec; 
-import {ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE} from './constants'
+var exec = require('child_process').exec;
+import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
 
 describe('Attach test', () => {
     let config;
@@ -15,18 +15,17 @@ describe('Attach test', () => {
         return (async () => {
             config = new AttachTest();
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
-            let cmdStr = 'cd dir&&cd src&&javac ./test/attachdebug.java&&java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 test.attachdebug';
-            
-             cmdStr=cmdStr.replace("dir",DATA_ROOT);
-             exec(cmdStr, function (err, stdout, stderr) {
+            let cmdStr = `cd ${DATA_ROOT}/src && javac -g ./test/attachdebug.java && java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 test.attachdebug`;
+
+            exec(cmdStr, function (err, stdout, stderr) {
                 if (err) {
                     console.log(stderr);
                 } else {
                     console.log(stdout);
                 }
             });
-             
-            debugEngine = await utils.createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE,config);
+
+            debugEngine = await utils.createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE, config);
         })();
     });
 
@@ -72,11 +71,11 @@ class AttachTest {
         return 'bin';
     }
 
-    get hostName(){
+    get hostName() {
         return '127.0.0.1'
     }
 
-    get port(){
+    get port() {
         return '1044'
     }
     get initialBreakpoints() {
@@ -108,9 +107,9 @@ class AttachTest {
                         utils.shouldMatch(variable.value, /^"ABCD"\s+\(id=\d+\)$/g);
                     }
                     if (variable.name === 'evens') {
-                        utils.shouldMatch(variable.value, /^12\s+\(id=\d+\)$/g);
+                        utils.shouldMatch(variable.value, /^12$/g);
                     }
-                    
+
                 }
             }
             await engine.resume(detail.event.body.threadId);
@@ -120,8 +119,9 @@ class AttachTest {
             outputList.push(detail.output);
             console.log("****", detail.output)
         });
-        engine.registerHandler('terminated', () => {           
-            utils.equalsWithoutLineEnding(outputList.join(''),'ABCD  12\r\n');
+        engine.registerHandler('terminated', () => {
+            //as this case is in attach mode,so nothing will print           
+            utils.equalsWithoutLineEnding(outputList.join(''), '');
         });
     }
 }
