@@ -81,7 +81,7 @@ class Encoding {
         let linePos = 0;
         const expectVariableList = {
             'var': {
-                type: 'java.lang.String',
+                type: 'String',
                 value: utils.wildcardToRegex('"abc中文def" (id=*)')
             }
         };
@@ -99,8 +99,8 @@ class Encoding {
                         console.log('----->', await engine.variables(variable.variablesReference));
                     }
                     if (variable.name === 'args') {
-                        variable.type.should.equal('java.lang.String[]');
-                        utils.shouldMatch(variable.value, /^java.lang.String\[0]\s+\(id=\d+\)$/g);
+                        variable.type.should.equal('String[]');
+                        utils.shouldMatch(variable.value, /^String\[0]\s+\(id=\d+\)$/g);
                     }  else if (expectVariableList[variable.name]) {
                         utils.compareVariable(expectVariableList[variable.name], variable);
                     }

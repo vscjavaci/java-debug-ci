@@ -103,7 +103,7 @@ class AttachTest {
                         console.log('----->', await engine.variables(variable.variablesReference));
                     }
                     if (variable.name === 'concat') {
-                        variable.type.should.equal('java.lang.String');
+                        variable.type.should.equal('String');
                         utils.shouldMatch(variable.value, /^"ABCD"\s+\(id=\d+\)$/g);
                     }
                     if (variable.name === 'evens') {

@@ -85,7 +85,7 @@ class StackTrace {
         });
         const expectVariableList = {
             'args': {
-                type: 'java.lang.String[]',
+                type: 'String[]',
                 value: utils.wildcardToRegex('java.lang.String[0] (id=*)')
             },
             'file': {
@@ -100,7 +100,7 @@ class StackTrace {
                 value: utils.wildcardToRegex('org.apache.lucene.document.Document (id=*)')
             },
             'indexDirectory' : {
-                type: 'java.lang.String'
+                type: 'String'
             }
         };
         engine.registerHandler('breakpoint:*/LuceneTest.java:*', async (event, arg1, arg2, detail) => {
