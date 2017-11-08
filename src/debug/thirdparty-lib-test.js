@@ -86,18 +86,18 @@ class StackTrace {
         const expectVariableList = {
             'args': {
                 type: 'String[]',
-                value: utils.wildcardToRegex('java.lang.String[0] (id=*)')
+                value: utils.wildcardToRegex('String[0] (id=*)')
             },
             'file': {
-                type: 'java.io.File',
-                value: utils.wildcardToRegex('java.io.File (id=*)')
+                type: 'File',
+                value: utils.wildcardToRegex('File (id=*)')
             },
             'documents': {
-                type: 'java.util.ArrayList',
+                type: 'ArrayList',
             },
             'document1': {
-                type: 'org.apache.lucene.document.Document',
-                value: utils.wildcardToRegex('org.apache.lucene.document.Document (id=*)')
+                type: 'Document',
+                value: utils.wildcardToRegex('Document (id=*)')
             },
             'indexDirectory' : {
                 type: 'String'
@@ -137,7 +137,7 @@ class StackTrace {
                     if (variable.name === 'this') {
                         assert(variable.variablesReference > 0, 'IndexWriter should have variablesReference');
                         utils.compareVariable({
-                            type: 'org.apache.lucene.index.IndexWriter'
+                            type: 'IndexWriter'
                         }, variable);
                     }
                 }
