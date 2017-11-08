@@ -87,7 +87,7 @@ class Variable {
                 value: 'null'
             },
             'str': {
-                value: /^\"string\stest[a]+\.+\"\s+\(id=\d+\)$/g,
+                value: /^\"string\stest[a]+\"\s+\(id=\d+\)$/g,
                 type: 'String',
             }
         };

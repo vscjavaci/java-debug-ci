@@ -135,15 +135,18 @@ export function startDebugServer(projectRoot, logLevel) {
                 console.log('ready', data);
                 session.send({
                     "jsonrpc": "2.0",
-                    "id": "setLogLevel",
+                    "id": "resolveMainClass",
                     "method": "workspace/executeCommand",
-                    "params": {"command": "vscode.java.configLogLevel", "arguments": [logLevel]}
+                    "params": {"command": "vscode.java.resolveMainClass", "arguments": []}
                 });
+                console.log('Resolve mainClass ', data.result);
+                console.log('Resolve mainClass---> ', data.id);
                 
 
             });
             session.on('jsonrpc', (data) => {
                 if (data.id === 'resolveMainClass') {
+                    resolveData.push(data.result);
                     session.send({
                         "jsonrpc": "2.0",
                         "id": "startDebugServer",
@@ -159,21 +162,7 @@ export function startDebugServer(projectRoot, logLevel) {
                 }
 
             });
-            session.on('jsonrpc',(data)=>{
-                if(data.id=== 'setLogLevel'){
-                    session.send({
-                        "jsonrpc": "2.0",
-                        "id": "resolveMainClass",
-                        "method": "workspace/executeCommand",
-                        "params": {"command": "vscode.java.resolveMainClass", "arguments": []}
-                    });
-                    console.log('Resolve mainClass ', data.result);
-                    console.log('Resolve mainClass---> ', data.id);
-                }
-                if (data.id === 'resolveMainClass') {
-                    resolveData.push(data.result);
-                }
-            });
+           
         });
     });
 }
