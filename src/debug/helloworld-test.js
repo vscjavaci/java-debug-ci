@@ -89,8 +89,8 @@ class HelloWorld {
                         console.log('----->', await engine.variables(variable.variablesReference));
                     }
                     if (variable.name === 'args') {
-                        variable.type.should.equal('java.lang.String[]');
-                        utils.shouldMatch(variable.value, /^java.lang.String\[0]\s+\(id=\d+\)$/g);
+                        variable.type.should.equal('String[]');
+                        utils.shouldMatch(variable.value, /^String\[0]\s+\(id=\d+\)$/g);
                     }
                 }
             }

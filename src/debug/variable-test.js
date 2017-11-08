@@ -88,7 +88,7 @@ class Variable {
             },
             'str': {
                 value: /^\"string\stest[a]+\.+\"\s+\(id=\d+\)$/g,
-                type: 'java.lang.String',
+                type: 'String',
             }
         };
         engine.registerHandler('breakpoint:*/VariableTest.java:*', async (event, arg1, arg2, detail) => {
@@ -105,8 +105,8 @@ class Variable {
                         console.log('----->', await engine.variables(variable.variablesReference));
                     }
                     if (variable.name === 'args') {
-                        variable.type.should.equal('java.lang.String[]');
-                        utils.shouldMatch(variable.value, /^java.lang.String\[0]\s+\(id=\d+\)$/g);
+                        variable.type.should.equal('String[]');
+                        utils.shouldMatch(variable.value, /^String\[0]\s+\(id=\d+\)$/g);
                     } else if (expectVariableList[variable.name]) {
                         utils.compareVariable(expectVariableList[variable.name], variable);
                     }
