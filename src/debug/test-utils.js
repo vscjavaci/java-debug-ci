@@ -76,8 +76,14 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     if (!fs.isDirectorySync(LANGUAGE_SERVER_ROOT)) {
         throw new Error(`${LANGUAGE_SERVER_ROOT} doesn't exist.`);
     }
-
-    const promise1 = startDebugServer(DATA_ROOT, config.logLevel || 'FINE');
+    let defaultSettings = {
+        "logLevel": "INFO",
+        "maxStringLength": 0,
+        "showStaticVariables": true,
+        "showQualifiedNames": false,
+        "showHex": false
+    };
+    const promise1 = startDebugServer(DATA_ROOT, config.userSettings || defaultSettings);
     mkdirp.sync(LANGUAGE_SERVER_WORKSPACE);
     if (isLanguageServerStarted()) {
         console.log('waiting for ls down.');
@@ -86,7 +92,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         try {
             rimraf.sync(LANGUAGE_SERVER_WORKSPACE);
         } catch (e) {
-            throw("Can't delete ws folder");
+            throw new Error(`Can't delete ${LANGUAGE_SERVER_WORKSPACE} folder`);
         }
     }
     startLS(LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE);
@@ -119,10 +125,10 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         "classPaths": _.map(_.compact([...(config.classPath || []), config.outputPath]), d => path.resolve(DATA_ROOT, d)),
         "sourcePaths": _.map(_.compact([config.sourcePath, config.testPath]), folder =>
             path.join(DATA_ROOT, folder)),
-        "port":config.port,
-        "host":config.hostName,
+        "port": config.port,
+        "host": config.hostName,
         "args": config.args,
-        "vmArgs":config.vmArgs,
+        "vmArgs": config.vmArgs,
         "encoding": config.encoding
     });
     config.withEngine(engine);

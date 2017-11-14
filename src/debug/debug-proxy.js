@@ -110,7 +110,7 @@ const initialProject = (session, rootPath) => {
     session.send(configObj);
 };
 
-export function startDebugServer(projectRoot, logLevel) {
+export function startDebugServer(projectRoot, userSettings) {
     server = net.createServer();
     server.listen(PORT, HOST, () => {
         console.log('Server listening on ' +
@@ -120,7 +120,7 @@ export function startDebugServer(projectRoot, logLevel) {
         server.on('connection', (sock) => {
             console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
             let session = new DebugSession(sock, sock);
-            let resolveData=new Array();
+            let resolveData = new Array();
             sock.on('error', err => {
                 if (err)
                     console.log('-------------------', err);
@@ -135,34 +135,46 @@ export function startDebugServer(projectRoot, logLevel) {
                 console.log('ready', data);
                 session.send({
                     "jsonrpc": "2.0",
-                    "id": "resolveMainClass",
+                    "id": "updateDebugSettings",
                     "method": "workspace/executeCommand",
-                    "params": {"command": "vscode.java.resolveMainClass", "arguments": []}
+                    "params": { "command": "vscode.java.updateDebugSettings", "arguments": [JSON.stringify(userSettings)] }
                 });
-                console.log('Resolve mainClass ', data.result);
-                console.log('Resolve mainClass---> ', data.id);
-                
 
             });
             session.on('jsonrpc', (data) => {
                 if (data.id === 'resolveMainClass') {
+                    console.log('Resolve mainClass result----> ', data.result);
+                    console.log('Resolve mainClass data id----> ', data.id);
                     resolveData.push(data.result);
                     session.send({
                         "jsonrpc": "2.0",
                         "id": "startDebugServer",
                         "method": "workspace/executeCommand",
-                        "params": {"command": "vscode.java.startDebugSession", "arguments": []}
+                        "params": { "command": "vscode.java.startDebugSession", "arguments": [] }
                     });
                 }
                 if (data.id === 'startDebugServer') {
                     console.log('Debug server started at ', data.result);
                     resolveData.push(data.result);
                     resolve(resolveData);
-                    
+
                 }
 
             });
-           
+            session.on('jsonrpc', (data) => {
+                if (data.id === 'updateDebugSettings') {
+                    console.log("updateDebugSettings:", data.result);
+                    session.send({
+                        "jsonrpc": "2.0",
+                        "id": "resolveMainClass",
+                        "method": "workspace/executeCommand",
+                        "params": { "command": "vscode.java.resolveMainClass", "arguments": [] }
+                    });
+                }
+
+
+            });
+
         });
     });
 }

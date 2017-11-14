@@ -2,7 +2,8 @@ import chai from 'chai'
 import path from 'path'
 import * as utils from './test-utils'
 chai.should();
-import {ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE} from './constants'
+import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
+import { util } from 'chai/lib/chai';
 
 describe('Args test', () => {
     let config;
@@ -13,7 +14,7 @@ describe('Args test', () => {
         return (async () => {
             config = new ArgsTest();
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
-            debugEngine = await utils.createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE,config);
+            debugEngine = await utils.createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE, config);
         })();
     });
 
@@ -63,16 +64,16 @@ class ArgsTest {
         return 'bin';
     }
 
-    get args(){
+    get args() {
         return "pro1 pro2 pro3"
     }
 
-    get vmArgs(){
+    get vmArgs() {
         return "-DsysProp1=sp1  -DsysProp2=sp2"
     }
 
-    get encoding(){
-        return "UTF-16";
+    get encoding() {
+        return "GBK";
     }
 
     get initialBreakpoints() {
@@ -86,6 +87,7 @@ class ArgsTest {
         const breakpointFile = path.join(engine.cwd, this.sourcePath, 'ArgsTest.java');
         const expectedLine = 20;
         const outputList = [];
+        let assertCount = 0;
         engine.registerHandler('breakpoint:*/ArgsTest.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
             detail.line.should.equal(expectedLine);
@@ -100,20 +102,26 @@ class ArgsTest {
                         console.log('----->', await engine.variables(variable.variablesReference));
                     }
                     if (variable.name === 'args') {
-                        variable.type.should.equal('java.lang.String[]');
-                        utils.shouldMatch(variable.value, /^java.lang.String\[3]\s+\(id=\d+\)$/g);
+                        variable.type.should.equal('String[]');
+                        utils.shouldMatch(variable.value, /^String\[3]\s+\(id=\d+\)$/g);
+                        assertCount++;
                     }
                     if (variable.name === 'sysProp1Value') {
                         utils.shouldMatch(variable.value, /^"sp1"\s+\(id=\d+\)$/g);
+                        assertCount++;
                     }
                     if (variable.name === 'sysProp2Value') {
                         utils.shouldMatch(variable.value, /^"sp2"\s+\(id=\d+\)$/g);
+                        assertCount++;
                     }
                     if (variable.name === 'encoding') {
-                        utils.shouldMatch(variable.value, /^"UTF-16"\s+\(id=\d+\)$/g);
+                        utils.shouldMatch(variable.value, /^"GBK"\s+\(id=\d+\)$/g);
+                        assertCount++;
                     }
                 }
             }
+            // add assertCount to make sure all assersion has been verified.
+            assertCount.should.equal(4);
             await engine.resume(detail.event.body.threadId);
         });
         engine.registerHandler('output*', (event, arg1, arg2, detail) => {
@@ -122,8 +130,8 @@ class ArgsTest {
             console.log("****", detail.output)
         });
         engine.registerHandler('terminated', () => {
-            utils.equalsWithoutLineEnding(outputList.join(''), 
-            'Program Arguments:pro1 pro2 pro3 VM Arguments:sp1 sp2\r\n');
+            utils.equalsWithoutLineEnding(outputList.join(''),
+                'Program Arguments:pro1 pro2 pro3 VM Arguments:sp1 sp2\r\n');
         });
     }
 }
