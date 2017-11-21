@@ -3,7 +3,8 @@ import path from 'path'
 import * as utils from './test-utils'
 chai.should();
 import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
-import { fs } from 'mz';
+const fs = require('fs');
+const fsp = require('fs-plus');
 let isDefaultSetting = true;
 let logArray = [];
 
@@ -52,18 +53,23 @@ describe('UserSettings test', () => {
     };
 
     let logLevelTest = function () {
-        let pathLog = [LANGUAGE_SERVER_WORKSPACE, '\\.metadata\\.log'].join('');
-        let readfile = fs.readFileSync(pathLog, 'utf-8');
-        logArray.push(readfile);
-        if (isDefaultSetting === false) {
-            console.log("****", "test logLevel");
-            utils.compareVariable(2, logArray.length);
-            let string = "!MESSAGE Set log level to : INFO";
-            let logdefault = String(logArray[0]).includes(string);
-            let logundefault = String(logArray[1]).includes(string);
-            utils.compareVariable(true, logdefault);
-            utils.compareVariable(false, logundefault);
+        let pathLog = path.join(LANGUAGE_SERVER_WORKSPACE, '\\.metadata\\.log');
+        if(fsp.existsSync(pathLog)){
+            let logText = fs.readFileSync(pathLog, 'utf-8');
+            logArray.push(logText);
+            if (isDefaultSetting === false) {
+                console.log("****", "test logLevel");
+                utils.compareVariable(2, logArray.length);
+                let string = "!MESSAGE Set log level to : INFO";
+                let logdefault = String(logArray[0]).includes(string);
+                let logundefault = String(logArray[1]).includes(string);
+                utils.compareVariable(true, logdefault);
+                utils.compareVariable(false, logundefault);
+            }
         }
+        else{
+            throw "The log file does not exist";
+        }        
     };
 
     it('should pass Usersettings test with default setting.', function (done) {
@@ -84,7 +90,7 @@ class UserSettings {
     }
 
     get sourcePath() {
-        return 'src/main/java';
+        return 'src/main/java/usersettings';
     }
 
     get outputPath() {
