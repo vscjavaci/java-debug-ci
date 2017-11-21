@@ -3,8 +3,8 @@ import path from 'path'
 import * as utils from './test-utils'
 chai.should();
 import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
-const fs = require('fs');
-const fsp = require('fs-plus');
+import fs from 'fs'
+import fsp from 'fs-plus'
 let isDefaultSetting = true;
 let logArray = [];
 
@@ -52,9 +52,9 @@ describe('UserSettings test', () => {
 
     };
 
-    let logLevelTest = function () {
+    let logLevelTest =()=>{
         let pathLog = path.join(LANGUAGE_SERVER_WORKSPACE, '\\.metadata\\.log');
-        if(fsp.existsSync(pathLog)){
+        if (fsp.existsSync(pathLog)) {
             let logText = fs.readFileSync(pathLog, 'utf-8');
             logArray.push(logText);
             if (isDefaultSetting === false) {
@@ -67,18 +67,16 @@ describe('UserSettings test', () => {
                 utils.compareVariable(false, logundefault);
             }
         }
-        else{
+        else {
             throw "The log file does not exist";
-        }        
+        }
     };
 
-    it('should pass Usersettings test with default setting.', function (done) {
-        this.timeout(1000 * 20);
+    it('should pass Usersettings test with default setting.',(done)=>{
         debugSetting(done);
     });
 
-    it('should pass Usersettings test with undefault setting.', function (done) {
-        this.timeout(1000 * 20);
+    it('should pass Usersettings test with undefault setting.',(done)=>{
         debugSetting(done);
     });
 
@@ -105,20 +103,13 @@ class UserSettings {
     }
 
     get userSettings() {
-
-        if (isDefaultSetting === true) {
-            return undefined;
-        }
-        else {
-            return {
-                "logLevel": "WARNING",
-                "maxStringLength": 4,
-                "showStaticVariables": false,
-                "showQualifiedNames": true,
-                "showHex": true
-            }
-        }
-
+        return isDefaultSetting ? undefined : {
+            "logLevel": "WARNING",
+            "maxStringLength": 4,
+            "showStaticVariables": false,
+            "showQualifiedNames": true,
+            "showHex": true
+        };
     }
 
     withEngine(engine) {
