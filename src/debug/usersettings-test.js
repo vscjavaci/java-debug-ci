@@ -5,6 +5,7 @@ chai.should();
 import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
 import fs from 'fs'
 import fsp from 'fs-plus'
+import {assert} from 'chai'
 let isDefaultSetting = true;
 let logArray = [];
 
@@ -57,14 +58,12 @@ describe('UserSettings test', () => {
         if (fsp.existsSync(pathLog)) {
             let logText = fs.readFileSync(pathLog, 'utf-8');
             logArray.push(logText);
-            if (isDefaultSetting === false) {
+            if (!isDefaultSetting) {
                 console.log("****", "test logLevel");
                 utils.compareVariable(2, logArray.length);
                 const string = "!MESSAGE Set log level to : INFO";
-                let logdefault =logArray[0].includes(string);
-                let logundefault = logArray[1].includes(string);
-                logdefault.should.equal(true);
-                logundefault.should.equal(false);
+                assert(logArray[0].includes(string));
+                assert(!(logArray[1].includes(string)));
             }
         }
         else {
