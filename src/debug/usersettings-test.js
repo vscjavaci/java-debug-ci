@@ -55,6 +55,7 @@ describe('UserSettings test', () => {
 
     let logLevelTest = () => {
         let pathLog = path.join(LANGUAGE_SERVER_WORKSPACE, '.metadata\\.log');
+        console.log('test', pathLog);                    
         if (fsp.existsSync(pathLog)) {
             let logText = fs.readFileSync(pathLog, 'utf-8');
             logArray.push(logText);
