@@ -88,7 +88,7 @@ class StackTrace {
             let level = 1;
             for (let sf of stackFrames.stackFrames) {
                 const scopes = await engine.scopes(sf.id);
-                console.log('***scopes', scopes);
+                //console.log('***scopes', scopes);
                 for (let scope of scopes.scopes) {
                     const variables = await engine.variables(scope.variablesReference);
                     for (let variable of variables.variables) {
