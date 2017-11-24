@@ -1,7 +1,7 @@
 import chai from 'chai'
 import path from 'path'
 import * as utils from './test-utils'
-import {ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE} from './constants'
+import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
 
 chai.should();
 const assert = chai.assert;
@@ -14,7 +14,7 @@ describe('StackTrace test', () => {
         return (async () => {
             config = new StackTrace();
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
-            debugEngine = await utils.createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE,config);
+            debugEngine = await utils.createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE, config);
         })();
     });
 
@@ -83,18 +83,16 @@ class StackTrace {
         engine.registerHandler('breakpoint:*/RecursiveTest.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
             detail.line.should.equal(8);
-            const stackFrames =  await engine.stackTrace(detail.event.body.threadId);
+            const stackFrames = await engine.stackTrace(detail.event.body.threadId);
             stackFrames.stackFrames.length.should.equal(1001);
             let level = 1;
             for (let sf of stackFrames.stackFrames) {
                 const scopes = await engine.scopes(sf.id);
-                console.log('***scopes', scopes);
                 for (let scope of scopes.scopes) {
                     const variables = await engine.variables(scope.variablesReference);
                     for (let variable of variables.variables) {
-                        // console.log('******', variable);
                         if (variable.variablesReference > 0) {
-                            // console.log('----->', await engine.variables(variable.variablesReference));
+                            await engine.variables(variable.variablesReference);
                         }
                         if (variable.name === 'number') {
                             variable.type.should.equal('int');
