@@ -72,11 +72,11 @@ describe('UserSettings test', () => {
     };
 
     it('should pass Usersettings test with default setting.', (done) => {
-        debugSetting(done);
+        return debugSetting(done);
     });
 
     it('should pass Usersettings test with undefault setting.', (done) => {
-        debugSetting(done);
+        return debugSetting(done);
     });
 
 });
