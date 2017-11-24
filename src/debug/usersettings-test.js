@@ -5,9 +5,8 @@ chai.should();
 import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
 import fs from 'fs'
 import fsp from 'fs-plus'
-import {assert} from 'chai'
+import { assert } from 'chai'
 let isDefaultSetting = true;
-let logArray = [];
 
 describe('UserSettings test', () => {
     let config;
@@ -42,8 +41,8 @@ describe('UserSettings test', () => {
                 await debugEngine.startDebug();
                 const terminateEvent = await debugEngine.waitForTerminate();
                 console.log('exiting', terminateEvent);
-                await utils.timeout(1000);
                 logLevelTest();
+                await utils.timeout(1000);
                 done();
             } catch (error) {
                 done(error);
@@ -57,17 +56,18 @@ describe('UserSettings test', () => {
         let pathLog = path.join(LANGUAGE_SERVER_WORKSPACE, '.metadata', '.log');        
         if (fsp.existsSync(pathLog)) {
             let logText = fs.readFileSync(pathLog, 'utf-8');
-            logArray.push(logText);
-            if (!isDefaultSetting) {
-                console.log("****", "test logLevel");
-                utils.compareVariable(2, logArray.length);
-                const string = "!MESSAGE Set log level to : INFO";
-                assert(logArray[0].includes(string));
-                assert(!(logArray[1].includes(string)));
+            const info = "!MESSAGE Set log level to : INFO";
+            if (isDefaultSetting) {
+                console.log("****", "test logLevel=info");
+                assert(logText.includes(info));
+            }
+            else {
+                console.log("****", "test logLevel=warning");
+                assert(!logText.includes(info));
             }
         }
         else {
-            throw "The log file does not exist";
+            throw new error("The log file does not exist");
         }
     };
 
