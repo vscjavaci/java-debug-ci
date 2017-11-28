@@ -31,7 +31,6 @@ describe('Evaluate test', () => {
                     for (let breakpoint of config.initialBreakpoints) {
                         const breakFile = path.join(DATA_ROOT, config.sourcePath, breakpoint.relativePath);
                         await debugEngine.setBreakpoints(breakFile, breakpoint.lines);
-
                     }
                 }
                 // // starting
@@ -64,64 +63,58 @@ class EvaluateTest {
     get initialBreakpoints() {
         return [{
             relativePath: "EvaluateTest.java",
-            lines: [6, 7]
+            lines: [7, 12]
         }];
     }
 
     withEngine(engine) {
         const breakpointFile = path.join(engine.cwd, this.sourcePath, 'EvaluateTest.java');
-        const expectedLines = [6, 7];
-        const outputList = [];
+        const expectedLines = [7, 12];
         let linePos = 0;
         engine.registerHandler('breakpoint:*/EvaluateTest.java:*', async (event, arg1, arg2, detail) => {
-            const sendEvaluateRequests = {
-                notExistVariable: {
-                    arg: "a",
-                    result: "a cannot be resolved to a variable"
-                },
-                const: {
-                    arg: "1+2",
-                    result: 3
-                },
-                variable: {
-                    arg: "i+1",
-                }
-            };
-
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
             detail.line.should.equal(expectedLines[linePos++]);
-
             console.log('***threads', await engine.threads());
-            try {
-                const evaluateNotExistVariable = await engine.evaluate(sendEvaluateRequests["notExistVariable"].arg, detail.id);
-            }
-            catch (ex) {
-                console.log("****", "Evaluate not exist variable");
-                assert(ex.message.includes(sendEvaluateRequests["notExistVariable"].result))
-            }
-            
-            console.log("****","Evaluate const ");
-            const evaluateConst = await engine.evaluate(sendEvaluateRequests["const"].arg, detail.id);
-            assert(evaluateConst.result == sendEvaluateRequests["const"].result);
+            let evaluateArguments = [{
+                type: "const",
+                request: "1+2",
+                expectedResponse: 3
+            }, {
+                type: "variable",
+                request: "i+1",
+                expectedResponse: 2
+            }, {
+                type: "notExistVariable",
+                request: "a",
+                expectedResponse: "a cannot be resolved to a variable"
+            }, {
+                type: "function",
+                request: "test()+10",
+                expectedResponse: 13
+            }];
 
-            console.log("****","Evaluate variable");
-            const evaluatei = await engine.evaluate(sendEvaluateRequests["variable"].arg, detail.id);
-            const scopes = await engine.scopes(detail.id);
-            console.log('***scopes', scopes);
-            for (let scope of scopes.scopes) {
-                const variables = await engine.variables(scope.variablesReference);
-                for (let variable of variables.variables) {
-                    console.log('******', variable);
-                    if (variable.variablesReference > 0) {
-                        console.log('----->', await engine.variables(variable.variablesReference));
+            let evaluateTest = async arg => {
+                let evaluateResponse;
+                try {
+                    evaluateResponse = await engine.evaluate(arg.request, detail.id, "watch");
+                    if (arg.type !== "notExistVariable") {
+                        console.log("******", "Evaluate " + arg.type);
+                        assert(evaluateResponse.result.toString() === arg.expectedResponse.toString());
                     }
-                    console.log("****", evaluatei);
-                    if (variable.name === sendEvaluateRequests["variable"].arg) {
-                        assert(evaluate.result === variable.value + 1)
-                    }
-
                 }
+                catch (ex) {
+                    if (arg.type === "notExistVariable") {
+                        console.log("******", "Evaluate not exisist variable");
+                        assert(ex.message.includes(arg.expectedResponse));
+                    }
+                }
+
+            };
+
+            for (let ele of evaluateArguments) {
+                await evaluateTest(ele);
             }
+
             await engine.resume(detail.event.body.threadId);
         });
     }
