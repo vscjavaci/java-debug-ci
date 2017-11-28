@@ -67,7 +67,7 @@ describe('UserSettings test', () => {
             }
         }
         else {
-            throw new error(pathLog + " file does not exist");
+            throw new error(`${pathLog} doesn't exist.`);
         }
     };
 
