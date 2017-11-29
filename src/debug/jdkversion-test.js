@@ -5,6 +5,7 @@ chai.should();
 import os from 'os'
 import { exec } from 'child_process'
 import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
+import { error } from 'util';
 
 describe('JdkVersion test', () => {
     let config;
