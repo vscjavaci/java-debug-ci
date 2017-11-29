@@ -119,7 +119,7 @@ export class DebugEngine {
         return response.body;
     }
 
-    async evaluate(expression, stackFrameId,context) {
+    async evaluate(expression, stackFrameId, context) {
         const response = await this.debugClient.evaluateRequest({
             expression: expression,
             frameId: stackFrameId,
