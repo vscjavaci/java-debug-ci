@@ -17,9 +17,9 @@ describe('JdkVersion test', () => {
         return (async () => {
             config = new JdkVersionTest();
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
-            let jdk9Home = process.env.JAVA_HOME9;
+            let jdk9Home = process.env.JAVA_HOME10;
             if (!jdk9Home) {
-                throw new error("Can't find env JAVA_HOME9");
+                throw new Error("Can't find env JAVA_HOME9");
             }
             console.log("***** JAVA_HOME9 : " + jdk9Home);
             let startStr = `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 JdkVersion`;
@@ -126,7 +126,7 @@ class JdkVersionTest {
                         variable.type.should.equal('float');
                         utils.shouldMatch(variable.value, /30.000000/)
                     }
-                    if (variable.name === 'jdkVersion') {                       
+                    if (variable.name === 'jdkVersion') {
                         let match = /\d\.\d\.\d/.exec(process.env.JAVA_HOME9);
                         variable.value.includes(match[0]).should.equal(true);
                     }
