@@ -19,16 +19,19 @@ describe('JdkVersion test', () => {
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
             let jdk9Home = process.env.JAVA_HOME9;
             if (!jdk9Home) {
-                throw new error("Can't find env JAVA_HOME9");
+                throw new Error("Can't find env JAVA_HOME9");
             }
+
             console.log("***** JAVA_HOME9 : " + jdk9Home);
-            let startStr = `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 JdkVersion`;
+            let startStr = ` -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 JdkVersion`;
             let compileStr = `cd ${DATA_ROOT}/src/main/java&&javac -g ./JdkVersion.java`;
             let setpathStr = "";
-            if (!os.platform() === 'win32') {
-                setpathStr = `export JAVA_HOME=${jdk9Home}&&export PATH=${jdk9Home}/bin:$PATH`;
-            } else {
+            if (os.platform() === 'win32') {
                 setpathStr = `set JAVA_HOME=\"${jdk9Home}\"`;
+                startStr = `\"${jdk9Home}\\bin\\java.exe\"`+startStr;
+            } else {
+                startStr = `java`+startStr;
+                setpathStr = `export JAVA_HOME=${jdk9Home}&&export PATH=${jdk9Home}/bin:$PATH`;
             }
 
             let cmdStr = [compileStr, setpathStr, startStr].join("&&");
