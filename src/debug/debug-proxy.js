@@ -110,7 +110,7 @@ const initialProject = (session, rootPath) => {
     session.send(configObj);
 };
 
-export function startDebugServer(projectRoot, userSettings) {
+export function startDebugServer(projectRoot, userSettings, config) {
     server = net.createServer();
     server.listen(PORT, HOST, () => {
         console.log('Server listening on ' +
@@ -141,26 +141,7 @@ export function startDebugServer(projectRoot, userSettings) {
                 });
 
             });
-            session.on('jsonrpc', (data) => {
-                if (data.id === 'resolveMainClass') {
-                    console.log('Resolve mainClass result----> ', data.result);
-                    console.log('Resolve mainClass data id----> ', data.id);
-                    resolveData.push(data.result);
-                    session.send({
-                        "jsonrpc": "2.0",
-                        "id": "startDebugServer",
-                        "method": "workspace/executeCommand",
-                        "params": { "command": "vscode.java.startDebugSession", "arguments": [] }
-                    });
-                }
-                if (data.id === 'startDebugServer') {
-                    console.log('Debug server started at ', data.result);
-                    resolveData.push(data.result);
-                    resolve(resolveData);
 
-                }
-
-            });
             session.on('jsonrpc', (data) => {
                 if (data.id === 'updateDebugSettings') {
                     console.log("updateDebugSettings:", data.result);
@@ -172,8 +153,82 @@ export function startDebugServer(projectRoot, userSettings) {
                     });
                 }
 
+            });
+
+            session.on('jsonrpc', (data) => {
+                if (data.id === 'resolveMainClass') {
+                    console.log('Resolve mainClass result----> ', data.result);
+                    console.log('Resolve mainClass data id----> ', data.id);
+
+                    //resovle mainclass
+                    let resolveMainClassResult = data.result;
+                    let mainClass = new Array();
+                    let projectName = config.projectName ? config.projectName : config.workspaceRoot;
+                    resolveData.push(data.result);
+                    if (!config.mainClass) {
+                        for (let item in resolveMainClassResult) {
+                            if (resolveMainClassResult[item]["projectName"] === projectName) {
+                                mainClass.push(resolveMainClassResult[item]["mainClass"]);
+                            }
+                        }
+                        if (mainClass.length <= 0) {
+                            throw new Error("can't find mainClass");
+                        }
+                        Object.defineProperty(config, "mainClass", {
+                            value: mainClass[0]
+                        })
+                    }
+                    //only run when provide projectName
+                    if (config.projectName) {
+                        session.send({
+                            "jsonrpc": "2.0",
+                            "id": "resolveClasspath",
+                            "method": "workspace/executeCommand",
+                            "params": { "command": "vscode.java.resolveClasspath", "arguments": [config.mainClass, config.projectName] }
+                        });
+                    }
+                    else {
+                        session.send({
+                            "jsonrpc": "2.0",
+                            "id": "startDebugServer",
+                            "method": "workspace/executeCommand",
+                            "params": { "command": "vscode.java.startDebugSession", "arguments": [] }
+                        });
+
+
+                    }
+
+                }
+            });
+            session.on('jsonrpc', (data) => {
+
+                if (data.id === 'resolveClasspath' && config.projectName) {
+                    console.log('Resolve resolveClasspath result----> ', data.result);
+                    console.log('Resolve resolveClasspath data id----> ', data.id);
+                    resolveData.push(data.result);
+                    let resovleClasspathResult = data.result;
+                    if (!config.classPath) {
+                        Object.defineProperty(config, "classPath", {
+                            value: resovleClasspathResult[1]
+                        })
+                    }
+                    session.send({
+                        "jsonrpc": "2.0",
+                        "id": "startDebugServer",
+                        "method": "workspace/executeCommand",
+                        "params": { "command": "vscode.java.startDebugSession", "arguments": [] }
+                    });
+                }
+
+                if (data.id === 'startDebugServer') {
+                    console.log('Debug server started at ', data.result);
+                    resolveData.push(data.result);
+                    resolve(resolveData);
+
+                }
 
             });
+
 
         });
     });

@@ -53,11 +53,11 @@ class ArgsTest {
     }
 
     get mainClass() {
-        return 'test.ArgsTest';
+        return 'ArgsTest';
     }
 
     get sourcePath() {
-        return 'src/test';
+        return 'src/main/java';
     }
 
     get outputPath() {
