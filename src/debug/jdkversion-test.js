@@ -126,8 +126,8 @@ class JdkVersionTest {
                         utils.shouldMatch(variable.value, /30\.000000/)
                     }
                     if (variable.name === 'jdkVersion') {
-                        let match = /\d\.\d\.\d/.exec(process.env.JAVA_HOME9);
-                        variable.value.includes(match[0]).should.equal(true);
+                        let match = '9.0.1';
+                        variable.value.includes(match).should.equal(true);
                     }
 
                 }
