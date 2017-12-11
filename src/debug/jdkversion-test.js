@@ -3,9 +3,10 @@ import path from 'path'
 import * as utils from './test-utils'
 chai.should();
 import os from 'os'
-import { exec } from 'child_process'
+import { exec, spawnSync } from 'child_process'
 import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
-
+import fs from "fs"
+let jdk9Version = '';
 describe('JdkVersion test', () => {
     let config;
     let DATA_ROOT;
@@ -25,13 +26,22 @@ describe('JdkVersion test', () => {
             console.log("***** JAVA_HOME9 : " + jdk9Home);
             let startStr = ` -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 JdkVersion`;
             let compileStr = `cd ${DATA_ROOT}/src/main/java&&javac -g ./JdkVersion.java`;
+            let result = "";
             if (os.platform() === 'win32') {
-                startStr = path.join(`\"${jdk9Home}`, "bin", 'java.exe\"') + startStr;
+                let pathStr = path.join(`\"${jdk9Home}`, "bin", 'java.exe\"');
+                startStr = pathStr + startStr;                
+                result = spawnSync('cmd.exe',["/c",`${jdk9Home}/bin/java.exe`,'-version']);
             } else {
-                startStr = path.join(`${jdk9Home}`, "bin", "java") + startStr;
-            }
-
+                let pathStr = path.join(`${jdk9Home}`, "bin", "java");
+                startStr = pathStr + startStr;              
+                result = spawnSync('/bin/bash', ["-c", pathStr+' -version']);
+            }           
+            let output = result.output.toString();
+            console.log(output);
+            let match = /\d\.\d\.\d/.exec(output);
+            jdk9Version = match[0];
             let cmdStr = compileStr + "&&" + startStr;
+
             console.log("***** EXECUTE COMMAD " + cmdStr);
             console.log("***** current JAVA_HOME: " + process.env.JAVA_HOME);
             console.log("***** Start debugger with JAVA_HOME9: " + jdk9Home);
@@ -126,8 +136,7 @@ class JdkVersionTest {
                         utils.shouldMatch(variable.value, /30\.000000/)
                     }
                     if (variable.name === 'jdkVersion') {
-                        let match = '9.0.1';
-                        variable.value.includes(match).should.equal(true);
+                        variable.value.includes(jdk9Version).should.equal(true);
                     }
 
                 }
