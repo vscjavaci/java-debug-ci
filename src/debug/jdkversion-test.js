@@ -25,17 +25,13 @@ describe('JdkVersion test', () => {
             console.log("***** JAVA_HOME9 : " + jdk9Home);
             let startStr = ` -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=1044 JdkVersion`;
             let compileStr = `cd ${DATA_ROOT}/src/main/java&&javac -g ./JdkVersion.java`;
-            let setpathStr = "";
             if (os.platform() === 'win32') {
-                setpathStr = `set JAVA_HOME=\"${jdk9Home}\"`;
-                startStr = `\"${jdk9Home}\\bin\\java.exe\"`+startStr;
+                startStr = path.join(`\"${jdk9Home}`, "bin", 'java.exe\"') + startStr;
             } else {
-                startStr = `java`+startStr;
-                setpathStr = `export JAVA_HOME=${jdk9Home}&&export PATH=${jdk9Home}/bin:$PATH`;
+                startStr = path.join(`${jdk9Home}`, "bin", "java") + startStr;
             }
 
-            let cmdStr = [compileStr, setpathStr, startStr].join("&&");
-
+            let cmdStr = compileStr + "&&" + startStr;
             console.log("***** EXECUTE COMMAD " + cmdStr);
             console.log("***** current JAVA_HOME: " + process.env.JAVA_HOME);
             console.log("***** Start debugger with JAVA_HOME9: " + jdk9Home);
@@ -129,7 +125,7 @@ class JdkVersionTest {
                         variable.type.should.equal('float');
                         utils.shouldMatch(variable.value, /30\.000000/)
                     }
-                    if (variable.name === 'jdkVersion') {                       
+                    if (variable.name === 'jdkVersion') {
                         let match = /\d\.\d\.\d/.exec(process.env.JAVA_HOME9);
                         variable.value.includes(match[0]).should.equal(true);
                     }
