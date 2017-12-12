@@ -127,13 +127,12 @@ class PetClinic {
                     });
                 }
                 (async () => {
-                    let data = await getWebPage();
-                    ()=>{
-                        console.log("******", "Visit the webpage successfully");
-                        assert(a.statusCode === 200);
-                        assert(a.headers['content-type'].includes('text/html'));
-                        await engine.disconnect(false);
-                    }
+                    let a = await getWebPage();                
+                    console.log("******", "Visit the webpage successfully");
+                    assert(a.statusCode === 200);
+                    assert(a.headers['content-type'].includes('text/html'));
+                    await engine.disconnect(false);
+                
                 })();
             
             }
