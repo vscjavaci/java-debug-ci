@@ -1,4 +1,3 @@
-
 import chai from 'chai'
 import path from 'path'
 import * as utils from './test-utils'
@@ -14,19 +13,25 @@ describe('PetClinic test', () => {
     let config;
     let DATA_ROOT;
     let debugEngine;
+
+    (() => {
+        let projectPath = path.join(ROOT, 'spring-petclinic');
+        if (!fs.existsSync(projectPath)) {
+            console.log("****", "Clone project");
+            let downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/spring-projects/spring-petclinic.git';
+            execSync(downloadCmd, { stdio: [0, 1, 2] });
+            console.log("****", "Clone finished");
+        }
+        else {
+            console.log("****", "Project is existed")
+        }
+
+    })();
+
     beforeEach(function () {
         this.timeout(1000 * 50);
         return (async () => {
             config = new PetClinic();
-            let projectPath = path.join(ROOT, 'spring-petclinic');
-            console.log(projectPath);
-            let downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/spring-projects/spring-petclinic.git';
-            if (!fs.existsSync(projectPath)) {
-                execSync(downloadCmd, { stdio: [0, 1, 2] });
-                let childPath = path.join(projectPath, ['src', 'main', 'resources'].join(path.sep));
-                console.log(childPath);
-            }
-            this.timeout(1000 * 50);
             DATA_ROOT = path.join(ROOT, config.workspaceRoot);
             debugEngine = await utils.createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE, config);
         })();
@@ -108,8 +113,8 @@ class PetClinic {
         });
 
         engine.registerHandler('output*', (event, arg1, arg2, detail) => {
-            if (detail.output.includes("Tomcat started on port(s): 8080 (http)")) {
-                async function getWebPage() {
+            if (detail.output.includes("Started PetClinicApplication")) {
+                function getWebPage() {
                     return new Promise((resolve) => {
                         let opts = {
                             url: 'http://localhost',
@@ -122,15 +127,17 @@ class PetClinic {
                     });
                 }
                 (async () => {
-                    let a = await getWebPage();
-                    console.log("******", "Visit the webpage successfully");
-                    assert(a.statusCode === 200);
-                    assert(a.headers['content-type'].includes('text/html'));
-                    engine.debugClient.emit('terminated');
+                    let data = await getWebPage();
+                    ()=>{
+                        console.log("******", "Visit the webpage successfully");
+                        assert(a.statusCode === 200);
+                        assert(a.headers['content-type'].includes('text/html'));
+                        await engine.disconnect(false);
+                    }
                 })();
-
+            
             }
-
+            //await engine.disconnect(false);
             outputList.push(detail.output);
             console.log("****", detail.output);
         });
@@ -147,4 +154,3 @@ class PetClinic {
 
     }
 }
-
