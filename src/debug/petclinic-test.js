@@ -13,21 +13,21 @@ describe('PetClinic test', () => {
     let config;
     let DATA_ROOT;
     let debugEngine;
+    before(function () {
+        (() => {
+            let projectPath = path.join(ROOT, 'spring-petclinic');
+            if (!fs.existsSync(projectPath)) {
+                console.log("****", "Clone project");
+                let downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/spring-projects/spring-petclinic.git';
+                execSync(downloadCmd, { stdio: [0, 1, 2] });
+                console.log("****", "Clone finished");
+            }
+            else {
+                console.log("****", "Project is existed")
+            }
 
-    (() => {
-        let projectPath = path.join(ROOT, 'spring-petclinic');
-        if (!fs.existsSync(projectPath)) {
-            console.log("****", "Clone project");
-            let downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/spring-projects/spring-petclinic.git';
-            execSync(downloadCmd, { stdio: [0, 1, 2] });
-            console.log("****", "Clone finished");
-        }
-        else {
-            console.log("****", "Project is existed")
-        }
-
-    })();
-
+        })();
+    });
     beforeEach(function () {
         this.timeout(1000 * 50);
         return (async () => {
@@ -129,11 +129,9 @@ class PetClinic {
                 }
                 (async () => {
                     let data = await getWebPage();
-                    () => {
-                        console.log("******", "Visit the webpage successfully");
-                        assert(data.statusCode === 200);
-                        assert(data.headers['content-type'].includes('text/html'));
-                    }
+                    console.log("******", "Visit the webpage successfully");
+                    assert(data.statusCode === 200);
+                    assert(data.headers['content-type'].includes('text/html'));
                     await utils.timeout(1000 * 5);
                     await engine.disconnect(false);
                 })();
