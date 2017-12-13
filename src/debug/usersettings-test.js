@@ -53,7 +53,7 @@ describe('UserSettings test', () => {
     };
 
     let logLevelTest = () => {
-        let pathLog = path.join(LANGUAGE_SERVER_WORKSPACE, '.metadata', '.log');        
+        let pathLog = path.join(LANGUAGE_SERVER_WORKSPACE, '.metadata', '.log');
         if (fsp.existsSync(pathLog)) {
             let logText = fs.readFileSync(pathLog, 'utf-8');
             const info = "!MESSAGE Set log level to : INFO";
@@ -67,16 +67,16 @@ describe('UserSettings test', () => {
             }
         }
         else {
-            throw new error("The log file does not exist");
+            throw new error(`${pathLog} doesn't exist.`);
         }
     };
 
     it('should pass Usersettings test with default setting.', (done) => {
-        debugSetting(done);
+        return debugSetting(done);
     });
 
     it('should pass Usersettings test with undefault setting.', (done) => {
-        debugSetting(done);
+        return debugSetting(done);
     });
 
 });
