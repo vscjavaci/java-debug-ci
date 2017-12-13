@@ -13,21 +13,21 @@ describe('PetClinic test', () => {
     let config;
     let DATA_ROOT;
     let debugEngine;
+    before(function () {
+        (() => {
+            let projectPath = path.join(ROOT, 'spring-petclinic');
+            if (!fs.existsSync(projectPath)) {
+                console.log("****", "Clone project");
+                let downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/spring-projects/spring-petclinic.git';
+                execSync(downloadCmd, { stdio: [0, 1, 2] });
+                console.log("****", "Clone finished");
+            }
+            else {
+                console.log("****", "Project is existed")
+            }
 
-    (() => {
-        let projectPath = path.join(ROOT, 'spring-petclinic');
-        if (!fs.existsSync(projectPath)) {
-            console.log("****", "Clone project");
-            let downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/spring-projects/spring-petclinic.git';
-            execSync(downloadCmd, { stdio: [0, 1, 2] });
-            console.log("****", "Clone finished");
-        }
-        else {
-            console.log("****", "Project is existed")
-        }
-
-    })();
-
+        })();
+    });
     beforeEach(function () {
         this.timeout(1000 * 50);
         return (async () => {
@@ -113,6 +113,7 @@ class PetClinic {
         });
 
         engine.registerHandler('output*', (event, arg1, arg2, detail) => {
+            detail.category.should.equal('stdout');
             if (detail.output.includes("Started PetClinicApplication")) {
                 function getWebPage() {
                     return new Promise((resolve) => {
@@ -127,16 +128,15 @@ class PetClinic {
                     });
                 }
                 (async () => {
-                    let a = await getWebPage();                
+                    let data = await getWebPage();
                     console.log("******", "Visit the webpage successfully");
-                    assert(a.statusCode === 200);
-                    assert(a.headers['content-type'].includes('text/html'));
+                    assert(data.statusCode === 200);
+                    assert(data.headers['content-type'].includes('text/html'));
+                    await utils.timeout(1000 * 5);
                     await engine.disconnect(false);
-                
                 })();
-            
+
             }
-            //await engine.disconnect(false);
             outputList.push(detail.output);
             console.log("****", detail.output);
         });
@@ -144,7 +144,10 @@ class PetClinic {
         engine.registerHandler('breakpoint:*/WelcomeController.java:*', async (event, arg1, arg2, detail) => {
             console.log("****", "The Bp on welcome is hit")
             utils.pathEquals(welcomeController, detail.source.path).should.equal(true);
+            console.log('***threads', await engine.threads());
+            const scopes = await engine.scopes(detail.id);
             await engine.resume(detail.event.body.threadId);
+
         });
 
         engine.registerHandler('terminated', () => {
