@@ -44,7 +44,9 @@
     "symlink-dir": "^1.1.0",
     "vscode-debugadapter-testsupport": "^1.23.0",
     "winreg": "^1.2.4",
-    "xml2js": "^0.4.18"
+    "xml2js": "^0.4.18",
+    "request": "^2.83.0",
+    "sync-request": "^4.1.0"
   },
   "devDependencies": {
     "del": "^3.0.0",

@@ -83,38 +83,22 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         "showQualifiedNames": false,
         "showHex": false
     };
-    const promise1 = startDebugServer(DATA_ROOT, config.userSettings || defaultSettings);
+    const promise1 = startDebugServer(DATA_ROOT, config.userSettings || defaultSettings, config);
     mkdirp.sync(LANGUAGE_SERVER_WORKSPACE);
     if (isLanguageServerStarted()) {
         console.log('waiting for ls down.');
         await killLanguageServer();
         await timeout(1000);
-        try {
-            rimraf.sync(LANGUAGE_SERVER_WORKSPACE);
-        } catch (e) {
-            throw new Error(`Can't delete ${LANGUAGE_SERVER_WORKSPACE} folder`);
-        }
+    }
+    try {
+        rimraf.sync(LANGUAGE_SERVER_WORKSPACE);
+    } catch (e) {
+        throw new Error(`Can't delete ${LANGUAGE_SERVER_WORKSPACE} folder`);
     }
     startLS(LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE);
     let resolveData = await promise1;
-    let mainClass = new Array();;
     console.log("###MainClassData-->", resolveData);
-    const port = parseInt(resolveData[1]);
-    let resolveMainClassResult = resolveData[0];
-    //resovle mainclass
-    if (!config.mainClass) {
-        for (var item in resolveMainClassResult) {
-            if (resolveMainClassResult[item]["projectName"] === config.workspaceRoot) {
-                mainClass.push(resolveMainClassResult[item]["mainClass"]);
-            }
-        }
-        if (mainClass.length <= 0) {
-            throw "can't find mainClass";
-        }
-        Object.defineProperty(config, "mainClass", {
-            value: mainClass[0]
-        })
-    }
+    const port = parseInt(config.projectName ? resolveData[2] : resolveData[1]);
 
     await promise1;
     const dc = new DebugClient('java');
@@ -129,7 +113,8 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         "host": config.hostName,
         "args": config.args,
         "vmArgs": config.vmArgs,
-        "encoding": config.encoding
+        "encoding": config.encoding,
+        "console": config.console
     });
     config.withEngine(engine);
     dc.on('terminated', (event) => {

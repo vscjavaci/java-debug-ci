@@ -44,6 +44,11 @@ export class DebugEngine {
         utils.validateResponse(response);
         return response.body;
     }
+    async disconnect(restart) {
+        const response = await this.debugClient.disconnectRequest({ "restart": restart });
+        utils.validateResponse(response);
+        return response.body;
+    }
 
     async attach() {
         const response = await this.debugClient.attachRequest(this.launchConfig);
