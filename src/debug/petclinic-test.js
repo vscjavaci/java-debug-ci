@@ -38,6 +38,11 @@ describe('PetClinic test', () => {
     });
 
     afterEach(() => {
+        try {
+            debugEngine.disconnect(false);
+        } catch (e) {
+            console.log("###  ", e);
+        }
         return debugEngine.close();
     });
 
