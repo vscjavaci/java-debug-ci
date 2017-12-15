@@ -106,6 +106,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     const engine = new DebugEngine(DATA_ROOT, dc, {
         "cwd": DATA_ROOT,
         "mainClass": config.mainClass,
+        "projectName": config.projectName || config.workspaceRoot,
         "classPaths": _.map(_.compact([...(config.classPath || []), config.outputPath]), d => path.resolve(DATA_ROOT, d)),
         "sourcePaths": _.map(_.compact([config.sourcePath, config.testPath]), folder =>
             path.join(DATA_ROOT, folder)),
