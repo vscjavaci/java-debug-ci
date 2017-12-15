@@ -10,24 +10,30 @@ import fs from 'fs';
 import { execSync } from 'child_process';
 import os from 'os';
 let randomStr = Date.now().toString();
-const url = "http://localhost:8080";
+const tomcatPort = 8880;
+const url = `http://localhost:${tomcatPort}`;
 describe('TodoApp test', () => {
     let config;
     let DATA_ROOT;
     let debugEngine;
     before(function () {
         this.timeout(1000 * 60);
-        let projectPath = path.join(ROOT, 'todo-app-java-on-azure');
+        const projectPath = path.join(ROOT, 'todo-app-java-on-azure');
         console.log(projectPath);
-        let downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/Microsoft/todo-app-java-on-azure.git';
+        const downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/Microsoft/todo-app-java-on-azure.git';
+        const configFilePath = path.join(projectPath, 'src', 'main', 'resources', 'application.properties');
         if (!fs.existsSync(projectPath)) {
             execSync(downloadCmd, { stdio: [0, 1, 2] });
-            let childPath = path.join(projectPath, ['src', 'main', 'resources'].join(path.sep));
             console.log(childPath);
             const dbKey = process.env.azure_documentdb_key;
-            let fileConent = `azure.documentdb.uri=https://todoapp-test-documentdb.documents.azure.com:443\/` +
-                `\nazure.documentdb.key=${dbKey}\nazure.documentdb.database=andy-demo`
-            fs.writeFileSync(`${childPath}` + path.sep + 'application.properties', fileConent, 'utf8')
+            const fileConent = `azure.documentdb.uri=https://todoapp-test-documentdb.documents.azure.com:443\/` +
+                `\nazure.documentdb.key=${dbKey}\nazure.documentdb.database=andy-demo\nserver.port=${tomcatPort}}`
+            fs.writeFileSync(configFilePath, fileConent, 'utf8');
+            console.log(`set port to ${tomcatPort}`);
+        } else {
+            const data = fs.readFileSync(configFilePath, 'utf8').replace(/server.port=\d{4}/g, `server.port=${tomcatPort}`);
+            fs.writeFileSync(configFilePath, data, 'utf8')
+            console.log(`set port to ${tomcatPort}`);
         }
 
 
@@ -118,7 +124,7 @@ class TodoApp {
         };
         let postRequest = {
             url: url + '/api/todolist',
-            port: 8080,
+            port: `${tomcatPort}`,
             method: 'POST',
             body: postData,
             json: true

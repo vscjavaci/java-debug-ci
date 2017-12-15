@@ -7,27 +7,34 @@ import { assert } from 'chai'
 import fs from 'fs'
 import os from 'os'
 import { execSync } from 'mz/child_process'
-let http = require('http')
+import http from 'http'
 
+const tomcatPort = 8880;
 describe('PetClinic test', () => {
     let config;
     let DATA_ROOT;
     let debugEngine;
     before(function () {
         (() => {
-            let projectPath = path.join(ROOT, 'spring-petclinic');
+            const projectPath = path.join(ROOT, 'spring-petclinic');
+            const configFilePath = path.join(projectPath, 'src', 'main', 'resources', 'application.properties');
             if (!fs.existsSync(projectPath)) {
                 console.log("****", "Clone project");
                 let downloadCmd = `cd ${ROOT}` + '&& git clone https://github.com/spring-projects/spring-petclinic.git';
                 execSync(downloadCmd, { stdio: [0, 1, 2] });
                 console.log("****", "Clone finished");
+                fs.appendFileSync(configFilePath, `\nserver.port=${tomcatPort}`);
+                console.log(`set port to ${tomcatPort}`);
             }
             else {
-                console.log("****", "Project is existed")
+                console.log("****", "Project is existed");
+                const data = fs.readFileSync(configFilePath, 'utf8').replace(/server.port=\d{4}/g, `server.port=${tomcatPort}`);
+                fs.writeFileSync(configFilePath, data, 'utf8');
+                console.log(`set port to ${tomcatPort}`);
             }
-
         })();
     });
+
     beforeEach(function () {
         this.timeout(1000 * 50);
         return (async () => {
@@ -124,7 +131,7 @@ class PetClinic {
                     return new Promise((resolve) => {
                         let opts = {
                             url: 'http://localhost',
-                            port: "8080"
+                            port: `${tomcatPort}`
                         };
                         http.get(opts, (res) => {
                             resolve(res);
