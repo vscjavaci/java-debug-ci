@@ -24,7 +24,6 @@ describe('TodoApp test', () => {
         const configFilePath = path.join(projectPath, 'src', 'main', 'resources', 'application.properties');
         if (!fs.existsSync(projectPath)) {
             execSync(downloadCmd, { stdio: [0, 1, 2] });
-            console.log(childPath);
             const dbKey = process.env.azure_documentdb_key;
             const fileConent = `azure.documentdb.uri=https://todoapp-test-documentdb.documents.azure.com:443\/` +
                 `\nazure.documentdb.key=${dbKey}\nazure.documentdb.database=andy-demo\nserver.port=${tomcatPort}}`
