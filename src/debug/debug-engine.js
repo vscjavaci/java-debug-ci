@@ -134,6 +134,15 @@ export class DebugEngine {
         return response.body;
     }
 
+    async stepIn(threadId,targetId){
+        const response=await this.debugClient.stepInRequest({
+            threadId:threadId,
+            targetId:targetId
+        });
+        utils.validateResponse(response);
+        return response.body;
+    }
+
     close() {
         const socket = this.debugClient._socket;
         socket.end();
