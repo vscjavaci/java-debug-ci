@@ -9,9 +9,6 @@ describe('StepFilter test', () => {
     let config;
     let DATA_ROOT;
     let debugEngine;
-    (() => {
-        const file
-    })();
     beforeEach(function () {
         this.timeout(1000 * 60);
         return (async () => {
@@ -52,7 +49,7 @@ describe('StepFilter test', () => {
 
 class StepFilter {
     get workspaceRoot() {
-        return '19.java9-app';
+        return '24.step-fiters';
     }
 
     get mainClass() {
@@ -95,21 +92,19 @@ class StepFilter {
 
     withEngine(engine) {
         const breakpointFile = path.join(engine.cwd, this.sourcePath, this.initialBreakpoints[0].relativePath);
-        const expectedLine = 11;
+        const expectedLines = [11, 773];
         const outputList = [];
-        let linePos = 0;
         engine.registerHandler('breakpoint:*/App.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
-            detail.line.should.equal(expectedLine);
+            detail.line.should.equal(expectedLines[0]);
             const threads = await engine.threads();
             console.log('***threads', threads);
             const scopes = await engine.scopes(detail.id);
             await engine.stepIn(detail.event.body.threadId);
         });
 
-        const expectedLines = [773];
         engine.registerHandler('step:*Gson.class:*', async (event, arg1, arg2, detail) => {
-            detail.line.should.equal(expectedLines[0]);
+            detail.line.should.equal(expectedLines[1]);
             const scopes = await engine.scopes(detail.id);
             console.log('***scopes', scopes);
             for (let scope of scopes.scopes) {
@@ -131,7 +126,7 @@ class StepFilter {
             }
         });
         engine.registerHandler('step:*App.java:*', async (event, arg1, arg2, detail) => {
-            detail.line.should.equal(expectedLine);
+            detail.line.should.equal(expectedLines[0]);
             await engine.resume(detail.event.body.threadId);
         });
 
