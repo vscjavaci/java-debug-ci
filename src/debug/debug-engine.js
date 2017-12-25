@@ -83,7 +83,6 @@ export class DebugEngine {
     async stepIn(threadId) {
         const response = await this.debugClient.stepInRequest({ threadId });
         utils.validateResponse(response);
-        return response.body;
     }
 
     async stepOut(threadId) {
@@ -129,15 +128,6 @@ export class DebugEngine {
             expression: expression,
             frameId: stackFrameId,
             context: context
-        });
-        utils.validateResponse(response);
-        return response.body;
-    }
-
-    async stepIn(threadId,targetId){
-        const response=await this.debugClient.stepInRequest({
-            threadId:threadId,
-            targetId:targetId
         });
         utils.validateResponse(response);
         return response.body;

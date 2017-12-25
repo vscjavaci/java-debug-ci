@@ -116,7 +116,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         "vmArgs": config.vmArgs,
         "encoding": config.encoding,
         "console": config.console,
-        "stepFilters":config.stepFilters
+        "stepFilters": config.stepFilters
     });
     config.withEngine(engine);
     dc.on('terminated', (event) => {

@@ -3,11 +3,15 @@ import path from 'path'
 import * as utils from './test-utils'
 chai.should();
 import { ROOT, LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE } from './constants'
+import fs from 'fs'
 
 describe('StepFilter test', () => {
     let config;
     let DATA_ROOT;
     let debugEngine;
+    (() => {
+        const file
+    })();
     beforeEach(function () {
         this.timeout(1000 * 60);
         return (async () => {
@@ -48,7 +52,7 @@ describe('StepFilter test', () => {
 
 class StepFilter {
     get workspaceRoot() {
-        return '24.step-fiters';
+        return '19.java9-app';
     }
 
     get mainClass() {
@@ -99,46 +103,46 @@ class StepFilter {
             detail.line.should.equal(expectedLine);
             const threads = await engine.threads();
             console.log('***threads', threads);
-            let threadId;
-            for (let thread of threads.threads) {
-                if(thread.name ==='Thread [main]'){
-                    threadId=thread.id;
-                    console.log("***threadId",threadId);
-                    break;
-                }
-            }
- await engine.stepIn(threadId,detail.id);
             const scopes = await engine.scopes(detail.id);
-            console.log("111111111111111111111111111111");
-            console.log('***scopes', scopes);
+            await engine.stepIn(detail.event.body.threadId);
+        });
 
-            /*
+        const expectedLines = [773];
+        engine.registerHandler('step:*Gson.class:*', async (event, arg1, arg2, detail) => {
+            detail.line.should.equal(expectedLines[0]);
+            const scopes = await engine.scopes(detail.id);
+            console.log('***scopes', scopes);
             for (let scope of scopes.scopes) {
                 const variables = await engine.variables(scope.variablesReference);
                 for (let variable of variables.variables) {
                     console.log('******', variable);
-                    if (variable.variablesReference > 0) {
-                        console.log('----->', await engine.variables(variable.variablesReference));
+                    if (variable.name === 'json') {
+                        variable.type.should.equal('String');
                     }
-                    if (variable.name === 'args') {
-                        variable.type.should.equal('String[]');
-                        utils.shouldMatch(variable.value, /^String\[0]\s+\(id=\d+\)$/g);
+                    if (variable.name === 'classOfT') {
+                        variable.type.should.equal('Class');
+                    }
+                    if (variable.name === 'this') {
+                        variable.type.should.equal('Gson');
                     }
                 }
+
+                await engine.stepOut(detail.event.body.threadId);
             }
-            */
+        });
+        engine.registerHandler('step:*App.java:*', async (event, arg1, arg2, detail) => {
+            detail.line.should.equal(expectedLine);
             await engine.resume(detail.event.body.threadId);
         });
+
         engine.registerHandler('output*', (event, arg1, arg2, detail) => {
-            //detail.category.should.equal('stdout');
+            detail.category.should.equal('stdout');
             outputList.push(detail.output);
             console.log("****", detail.output)
         });
+
         engine.registerHandler('terminated', () => {
-            /*
-            linePos.should.equal(expectedLines.length);
-            utils.equalsWithoutLineEnding(outputList.join(''), 'hello world\r\n');
-            */
+            utils.equalsWithoutLineEnding(outputList.join(''), 'jinbwan\n');
         });
     }
 }
