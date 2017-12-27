@@ -49,7 +49,7 @@ describe('StepFilter test', () => {
 
 class StepFilter {
     get workspaceRoot() {
-        return '24.step-fiters';
+        return '25.step-fiters';
     }
 
     get mainClass() {
