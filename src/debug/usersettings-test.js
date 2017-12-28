@@ -97,7 +97,7 @@ class UserSettings {
     get initialBreakpoints() {
         return [{
             relativePath: "UserSettings.java",
-            lines: [8, 9]
+            lines: [9]
         }];
     }
 
@@ -107,15 +107,20 @@ class UserSettings {
             "maxStringLength": 4,
             "showStaticVariables": false,
             "showQualifiedNames": true,
-            "showHex": true
+            "showHex": true,
+            "stopOnEntry": true
         };
     }
 
     withEngine(engine) {
         const breakpointFile = path.join(engine.cwd, this.sourcePath, 'UserSettings.java');
-        const expectedLines = [8, 9];
+        const expectedLines = [9];
         const outputList = [];
         let linePos = 0;
+        engine.registerHandler('entry:*/UserSettings.java:*', async (event, arg1, arg2, detail) => {
+            utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
+            detail.line.should.equal(8);
+        });
         engine.registerHandler('breakpoint:*/UserSettings.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
             detail.line.should.equal(expectedLines[linePos++]);
