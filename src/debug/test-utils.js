@@ -81,7 +81,8 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         "maxStringLength": 0,
         "showStaticVariables": true,
         "showQualifiedNames": false,
-        "showHex": false
+        "showHex": false,
+        "stopOnEntry": false
     };
     const promise1 = startDebugServer(DATA_ROOT, config.userSettings || defaultSettings, config);
     mkdirp.sync(LANGUAGE_SERVER_WORKSPACE);
@@ -134,7 +135,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
 
     dc.on('stopped', async (event) => {
         const stopped = event.body;
-        if (stopped.reason === 'breakpoint' || stopped.reason === 'step') {
+        if (stopped.reason === 'breakpoint' || stopped.reason === 'step' || stopped.reason === 'entry') {
             try {
                 const stackTraces = (await engine.stackTrace(event.body.threadId)).stackFrames;
                 assert(stackTraces.length, 'empty stackTrace is illegal');
