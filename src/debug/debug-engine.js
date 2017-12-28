@@ -83,7 +83,6 @@ export class DebugEngine {
     async stepIn(threadId) {
         const response = await this.debugClient.stepInRequest({ threadId });
         utils.validateResponse(response);
-        return response.body;
     }
 
     async stepOut(threadId) {
