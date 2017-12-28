@@ -114,16 +114,17 @@ class UserSettings {
 
     withEngine(engine) {
         const breakpointFile = path.join(engine.cwd, this.sourcePath, 'UserSettings.java');
-        const expectedLines = [9];
+        const expectedLine = 9;
+        const stepOnEnryLine = 8;
         const outputList = [];
         let linePos = 0;
         engine.registerHandler('entry:*/UserSettings.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
-            detail.line.should.equal(8);
+            detail.line.should.equal(stepOnEnryLine);
         });
         engine.registerHandler('breakpoint:*/UserSettings.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
-            detail.line.should.equal(expectedLines[linePos++]);
+            detail.line.should.equal(expectedLine);
             console.log('***threads', await engine.threads());
             const scopes = await engine.scopes(detail.id);
             console.log('***scopes', scopes);
