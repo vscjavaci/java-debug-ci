@@ -116,6 +116,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         "vmArgs": config.vmArgs,
         "encoding": config.encoding,
         "console": config.console,
+        "stopOnEntry":config.stopOnEntry
         "stepFilters": config.stepFilters
     });
     config.withEngine(engine);
@@ -135,7 +136,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
 
     dc.on('stopped', async (event) => {
         const stopped = event.body;
-        if (stopped.reason === 'breakpoint' || stopped.reason === 'step') {
+        if (stopped.reason === 'breakpoint' || stopped.reason === 'step' || stopped.reason === 'entry') {
             try {
                 const stackTraces = (await engine.stackTrace(event.body.threadId)).stackFrames;
                 assert(stackTraces.length, 'empty stackTrace is illegal');

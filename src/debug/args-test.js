@@ -76,6 +76,10 @@ class ArgsTest {
         return "GBK";
     }
 
+    get stopOnEntry() {
+        return true;
+    }
+
     get initialBreakpoints() {
         return [{
             relativePath: "ArgsTest.java",
@@ -86,8 +90,14 @@ class ArgsTest {
     withEngine(engine) {
         const breakpointFile = path.join(engine.cwd, this.sourcePath, 'ArgsTest.java');
         const expectedLine = 20;
+        const stopOnEntryLine = 12;
         const outputList = [];
         let assertCount = 0;
+        engine.registerHandler('entry:*/ArgsTest.java:*', async (event, arg1, arg2, detail) => {
+            utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
+            detail.line.should.equal(stopOnEntryLine);
+            await engine.resume(detail.event.body.threadId);
+        });
         engine.registerHandler('breakpoint:*/ArgsTest.java:*', async (event, arg1, arg2, detail) => {
             utils.pathEquals(breakpointFile, detail.source.path).should.equal(true);
             detail.line.should.equal(expectedLine);
