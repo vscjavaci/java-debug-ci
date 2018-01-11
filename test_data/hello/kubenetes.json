@@ -23,8 +23,7 @@
         "apiVersion": {
             "type": "string",
             "enum": [
-                "v1",
-                "v1/beta"
+                "v1"
             ],
             "description": "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#resources"
         },
@@ -50,7 +49,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -89,7 +111,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -113,7 +158,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object metadata.",
@@ -188,7 +256,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata.",
@@ -216,7 +307,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "name": {
                     "description": "Required: This must match the Name of a deployment.",
@@ -394,7 +508,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object metadata; More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata.",
@@ -460,7 +597,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
@@ -500,7 +660,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ListMeta"
@@ -631,7 +814,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
@@ -711,7 +917,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
@@ -758,7 +987,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
@@ -850,7 +1102,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
@@ -930,7 +1205,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
@@ -977,7 +1275,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "$ref": "#/definitions/io.k8s.apimachinery.pkg.apis.meta.v1.ObjectMeta"
@@ -1217,7 +1538,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -1406,7 +1750,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -1440,7 +1807,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -1471,7 +1861,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -1538,7 +1951,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -2063,7 +2499,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -2104,7 +2563,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -2203,7 +2685,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "lastTimestamp": {
                     "description": "The time at which the most recent occurrence of this event was recorded.",
@@ -2257,7 +2762,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -2638,7 +3166,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -2725,7 +3276,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -2831,7 +3405,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -2873,7 +3470,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -2921,7 +3541,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -3042,7 +3685,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -3081,7 +3747,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -3338,7 +4027,30 @@
                 },
                 "kind": {
                     "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "name": {
                     "description": "Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names",
@@ -3367,7 +4079,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -3399,7 +4134,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -3441,7 +4199,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -3542,7 +4323,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -3721,7 +4525,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -3864,7 +4691,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -4140,7 +4990,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -4178,7 +5051,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -4388,7 +5284,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "If the Labels of a ReplicationController are empty, they are defaulted to be the same as the Pod(s) that the replication controller manages. Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -4467,7 +5386,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -4579,7 +5521,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -4621,7 +5586,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -4787,7 +5775,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -4865,7 +5876,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -4981,7 +6015,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -5024,7 +6081,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard object's metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#metadata",
@@ -5067,7 +6147,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -5101,7 +6204,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "metadata": {
                     "description": "Standard list metadata. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
@@ -5597,7 +6723,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "name": {
                     "description": "name is the name of the group.",
@@ -5649,7 +6798,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 }
             },
             "x-kubernetes-group-version-kind": [
@@ -5726,7 +6898,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "resources": {
                     "description": "resources contains the name of the resources and if they are namespaced.",
@@ -5757,7 +6952,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "serverAddressByClientCIDRs": {
                     "description": "a map of client CIDR to server address that is serving this group. This is to help clients reach servers in the most network-efficient way possible. Clients can use the appropriate server address as per the CIDR that they match. In case of multiple matches, clients should use the longest matching CIDR. The server returns only those CIDRs that it thinks that the client can match. For example: the master will return an internal IP CIDR only, if the client reaches the server using an internal IP. Server looks at X-Forwarded-For header or X-Real-Ip header or request.RemoteAddr (in that order) to get the client IP.",
@@ -5796,7 +7014,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "orphanDependents": {
                     "description": "Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.",
@@ -6171,7 +7412,30 @@
                 },
                 "kind": {
                     "description": "Kind of the referent. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "name": {
                     "description": "Name of the referent. More info: http://kubernetes.io/docs/user-guide/identifiers#names",
@@ -6230,7 +7494,30 @@
                 },
                 "kind": {
                     "description": "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "message": {
                     "description": "A human-readable description of the status of this operation.",
@@ -6290,7 +7577,30 @@
                 },
                 "kind": {
                     "description": "The kind attribute of the resource associated with the status StatusReason. On some operations may differ from the requested resource Kind. More info: https://git.k8s.io/community/contributors/devel/api-conventions.md#types-kinds",
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "ControllerRevision",
+                        "Deployment",
+                        "StatefulSet",
+                        "ComponentStatus",
+                        "ConfigMap",
+                        "Endpoints",
+                        "Event",
+                        "LimitRange",
+                        "Namespace",
+                        "Node",
+                        "PersistentVolumeClaim",
+                        "PersistentVolume",
+                        "Pod",
+                        "PodTemplate",
+                        "ReplicationController",
+                        "ResourceQuota",
+                        "Secret",
+                        "ServiceAccount",
+                        "Service",
+                        "APIGroup",
+                        "APIResource"
+                    ]
                 },
                 "name": {
                     "description": "The name attribute of the resource associated with the status StatusReason (when there is a single name which can be described).",
