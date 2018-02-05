@@ -22,91 +22,195 @@ const initialProject = (session, rootPath) => {
         throw new Error('Cannot find com.microsoft.java.debug.plugin-*.jar');
     }
     console.log('using', jars);
-    let configObj = {
-        "jsonrpc": "2.0",
-        "id": 0,
-        "method": "initialize",
-        "params": {
-            "processId": process.pid,
-            "rootPath": rootPath,
-            "rootUri": 'file:///' + myEncodeURI(rootPath),
-            "capabilities": {
-                "workspace": {
-                    "didChangeConfiguration": {
-                        "dynamicRegistration": true
-                    },
-                    "didChangeWatchedFiles": {
-                        "dynamicRegistration": true
-                    },
-                    "symbol": {
-                        "dynamicRegistration": true
-                    },
-                    "executeCommand": {
-                        "dynamicRegistration": true
-                    }
-                },
-                "textDocument": {
-                    "synchronization": {
-                        "dynamicRegistration": true,
-                        "willSave": true,
-                        "willSaveWaitUntil": true,
-                        "didSave": true
-                    },
-                    "completion": {
-                        "dynamicRegistration": true,
-                        "completionItem": {
-                            "snippetSupport": true
+    let configObj;
+    if (rootPath.testName === "multi-root") {
+        configObj = {
+            "jsonrpc": "2.0",
+            "id": 0,
+            "method": "initialize",
+            "params": {
+                "processId": process.pid,
+                "rootPath": rootPath.petclinicPath,
+                "rootUri": 'file:///' + myEncodeURI(rootPath.petclinicPath),
+                "capabilities": {
+                    "workspace": {
+                        "didChangeConfiguration": {
+                            "dynamicRegistration": true
+                        },
+                        "didChangeWatchedFiles": {
+                            "dynamicRegistration": true
+                        },
+                        "symbol": {
+                            "dynamicRegistration": true
+                        },
+                        "executeCommand": {
+                            "dynamicRegistration": true
                         }
                     },
-                    "hover": {
-                        "dynamicRegistration": true
-                    },
-                    "signatureHelp": {
-                        "dynamicRegistration": true
-                    },
-                    "definition": {
-                        "dynamicRegistration": true
-                    },
-                    "references": {
-                        "dynamicRegistration": true
-                    },
-                    "documentHighlight": {
-                        "dynamicRegistration": true
-                    },
-                    "documentSymbol": {
-                        "dynamicRegistration": true
-                    },
-                    "codeAction": {
-                        "dynamicRegistration": true
-                    },
-                    "codeLens": {
-                        "dynamicRegistration": true
-                    },
-                    "formatting": {
-                        "dynamicRegistration": true
-                    },
-                    "rangeFormatting": {
-                        "dynamicRegistration": true
-                    },
-                    "onTypeFormatting": {
-                        "dynamicRegistration": true
-                    },
-                    "rename": {
-                        "dynamicRegistration": true
-                    },
-                    "documentLink": {
-                        "dynamicRegistration": true
+                    "textDocument": {
+                        "synchronization": {
+                            "dynamicRegistration": true,
+                            "willSave": true,
+                            "willSaveWaitUntil": true,
+                            "didSave": true
+                        },
+                        "completion": {
+                            "dynamicRegistration": true,
+                            "completionItem": {
+                                "snippetSupport": true
+                            }
+                        },
+                        "hover": {
+                            "dynamicRegistration": true
+                        },
+                        "signatureHelp": {
+                            "dynamicRegistration": true
+                        },
+                        "definition": {
+                            "dynamicRegistration": true
+                        },
+                        "references": {
+                            "dynamicRegistration": true
+                        },
+                        "documentHighlight": {
+                            "dynamicRegistration": true
+                        },
+                        "documentSymbol": {
+                            "dynamicRegistration": true
+                        },
+                        "codeAction": {
+                            "dynamicRegistration": true
+                        },
+                        "codeLens": {
+                            "dynamicRegistration": true
+                        },
+                        "formatting": {
+                            "dynamicRegistration": true
+                        },
+                        "rangeFormatting": {
+                            "dynamicRegistration": true
+                        },
+                        "onTypeFormatting": {
+                            "dynamicRegistration": true
+                        },
+                        "rename": {
+                            "dynamicRegistration": true
+                        },
+                        "documentLink": {
+                            "dynamicRegistration": true
+                        }
                     }
-                }
-            },
-            "initializationOptions": {
-                "bundles": [
-                    jars
+                },
+                "initializationOptions": {
+                    "bundles": [
+                        jars
+                    ],
+                    "workspaceFolders": [
+                        'file:///' + myEncodeURI(rootPath.petclinicPath),
+                        'file:///' + myEncodeURI(rootPath.todoPath)
+                    ]
+                },
+                "trace": "off",
+                "workspaceFolders": [
+                    {
+                        "uri": 'file:///' + myEncodeURI(rootPath.petclinicPath),
+                        "name": "spring-petclinic"
+                    },
+                    {
+                        "uri": 'file:///' + myEncodeURI(rootPath.todoPath),
+                        "name": "todo-app-java-on-azure"
+                    }
                 ]
-            },
-            "trace": "off"
-        }
-    };
+            }
+        };
+    }
+    else {
+        configObj = {
+            "jsonrpc": "2.0",
+            "id": 0,
+            "method": "initialize",
+            "params": {
+                "processId": process.pid,
+                "rootPath": rootPath,
+                "rootUri": 'file:///' + myEncodeURI(rootPath),
+                "capabilities": {
+                    "workspace": {
+                        "didChangeConfiguration": {
+                            "dynamicRegistration": true
+                        },
+                        "didChangeWatchedFiles": {
+                            "dynamicRegistration": true
+                        },
+                        "symbol": {
+                            "dynamicRegistration": true
+                        },
+                        "executeCommand": {
+                            "dynamicRegistration": true
+                        }
+                    },
+                    "textDocument": {
+                        "synchronization": {
+                            "dynamicRegistration": true,
+                            "willSave": true,
+                            "willSaveWaitUntil": true,
+                            "didSave": true
+                        },
+                        "completion": {
+                            "dynamicRegistration": true,
+                            "completionItem": {
+                                "snippetSupport": true
+                            }
+                        },
+                        "hover": {
+                            "dynamicRegistration": true
+                        },
+                        "signatureHelp": {
+                            "dynamicRegistration": true
+                        },
+                        "definition": {
+                            "dynamicRegistration": true
+                        },
+                        "references": {
+                            "dynamicRegistration": true
+                        },
+                        "documentHighlight": {
+                            "dynamicRegistration": true
+                        },
+                        "documentSymbol": {
+                            "dynamicRegistration": true
+                        },
+                        "codeAction": {
+                            "dynamicRegistration": true
+                        },
+                        "codeLens": {
+                            "dynamicRegistration": true
+                        },
+                        "formatting": {
+                            "dynamicRegistration": true
+                        },
+                        "rangeFormatting": {
+                            "dynamicRegistration": true
+                        },
+                        "onTypeFormatting": {
+                            "dynamicRegistration": true
+                        },
+                        "rename": {
+                            "dynamicRegistration": true
+                        },
+                        "documentLink": {
+                            "dynamicRegistration": true
+                        }
+                    }
+                },
+                "initializationOptions": {
+                    "bundles": [
+                        jars
+                    ]
+                },
+                "trace": "off"
+            }
+        };
+    }
     // console.log(JSON.stringify(configObj, null, 4))
     session.send(configObj);
 };
@@ -131,7 +235,12 @@ export function startDebugServer(projectRoot, userSettings, config) {
                     sock.remoteAddress + ' ' + sock.remotePort);
                 session = null;
             });
-            initialProject(session, projectRoot);
+            if (config.testName === "multi-root") {
+                initialProject(session, config);
+            }
+            else {
+                initialProject(session, projectRoot);
+            }
             session.on('ready', (data) => {
                 console.log('ready', data);
                 session.send({
@@ -171,7 +280,23 @@ export function startDebugServer(projectRoot, userSettings, config) {
                 if (data.id === 'resolveMainClass') {
                     console.log('Resolve mainClass result----> ', data.result);
                     console.log('Resolve mainClass data id----> ', data.id);
-
+                    if (config.testName === "multi-root") {
+                        for (let result of data.result) {
+                            if (result.projectName === "spring-petclinic") {
+                                Object.defineProperties(config, {
+                                    projectName: {
+                                        value: result.projectName,
+                                        writable: false
+                                    },
+                                    mainClass: {
+                                        value: result.mainClass,
+                                        writable: false
+                                    }
+                                });
+                                break;
+                            }
+                        }
+                    }
                     //resovle mainclass
                     let resolveMainClassResult = data.result;
                     let mainClass = new Array();
@@ -215,8 +340,8 @@ export function startDebugServer(projectRoot, userSettings, config) {
             session.on('jsonrpc', (data) => {
 
                 if (data.id === 'resolveClasspath' && config.projectName) {
-                    console.log('Resolve resolveClasspath result----> ', data.result);
-                    console.log('Resolve resolveClasspath data id----> ', data.id);
+                    //console.log('Resolve resolveClasspath result----> ', data.result);
+                    //console.log('Resolve resolveClasspath data id----> ', data.id);
                     resolveData.push(data.result);
                     let resovleClasspathResult = data.result;
                     if (!config.classPath) {

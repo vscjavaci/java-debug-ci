@@ -97,9 +97,14 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
     }
     startLS(LANGUAGE_SERVER_ROOT, LANGUAGE_SERVER_WORKSPACE);
     let resolveData = await promise1;
-    console.log("###MainClassData-->", resolveData);
+    //console.log("###MainClassData-->", resolveData);
+    if(config.testName === "multi-root"){
+        Object.defineProperty(config,'data',{
+            value:resolveData[0],
+            writable:false
+        })
+    }
     const port = parseInt(config.projectName ? resolveData[2] : resolveData[1]);
-
     await promise1;
     const dc = new DebugClient('java');
     await dc.start(port);
@@ -116,7 +121,7 @@ export async function createDebugEngine(DATA_ROOT, LANGUAGE_SERVER_ROOT, LANGUAG
         "vmArgs": config.vmArgs,
         "encoding": config.encoding,
         "console": config.console,
-        "stopOnEntry":config.stopOnEntry,
+        "stopOnEntry": config.stopOnEntry,
         "stepFilters": config.stepFilters
     });
     config.withEngine(engine);
