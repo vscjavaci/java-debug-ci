@@ -8,7 +8,7 @@ public class EvaluateTest {
 		System.out.print(test1 + i);
 	}
 
-	public int test() {
+	public static int test() {
 		return 3;
 	}
 }
